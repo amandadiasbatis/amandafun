@@ -1,0 +1,405 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#f8f7f4">
+  <title>Quiz dos planetas | quizzmandy</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #292641;
+      --muted: #77758a;
+      --purple: #6557d9;
+      --lavender: #f1efff;
+      --yellow: #f3c354;
+      --green: #278765;
+      --red: #d95261;
+      --line: #eae8f0;
+      --paper: #fff;
+      --bg: #f8f7f4;
+    }
+
+    * { box-sizing: border-box; }
+    body { min-width: 320px; min-height: 100vh; margin: 0; background: var(--bg); color: var(--ink); font-family: "Trebuchet MS", "Segoe UI", sans-serif; }
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid #a69df0; outline-offset: 3px; }
+    .shell { display: flex; min-height: 100vh; flex-direction: column; overflow: hidden; padding: 0 7.1%; }
+    .shell::before, .shell::after { position: fixed; z-index: 0; width: 300px; aspect-ratio: 1; border: 1px solid rgb(101 87 217 / 8%); border-radius: 50%; content: ""; pointer-events: none; }
+    .shell::before { top: 100px; left: -150px; }
+    .shell::after { right: -120px; bottom: 40px; }
+    .topbar { position: relative; z-index: 1; display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); }
+    .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); font-size: 21px; font-weight: 800; text-decoration: none; }
+    .brand-mark { display: grid; width: 34px; aspect-ratio: 1; place-items: center; border-radius: 11px; background: var(--purple); color: #fff; font-size: 20px; }
+    .brand-dot { color: var(--purple); }
+    .game-links { display: flex; align-items: center; gap: 8px; }
+    .game-links a { border-radius: 8px; padding: 9px 11px; color: var(--muted); font-size: 12px; font-weight: 700; text-decoration: none; }
+    .game-links a:hover, .game-links a[aria-current="page"] { background: var(--lavender); color: var(--purple); }
+    .page-content { position: relative; z-index: 1; display: grid; flex: 1; place-items: center; padding: 48px 0 54px; }
+    .intro-layout { display: grid; width: min(100%, 1060px); align-items: center; grid-template-columns: 1fr 1fr; gap: clamp(32px, 7vw, 78px); animation: appear 360ms ease both; }
+    .eyebrow { display: flex; align-items: center; gap: 10px; color: var(--purple); font-size: 10px; font-weight: 800; letter-spacing: .16em; }
+    .eyebrow-line { width: 22px; height: 2px; border-radius: 2px; background: var(--yellow); }
+    .intro-copy h1 { margin: 22px 0 18px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(42px, 5.1vw, 66px); line-height: 1.05; }
+    .highlight { color: var(--purple); }
+    .intro-description { max-width: 420px; margin: 0; color: var(--muted); font-size: 15px; line-height: 1.8; }
+    .features { display: flex; align-items: center; gap: 18px; margin-top: 30px; }
+    .feature { display: flex; align-items: center; gap: 9px; }
+    .feature-icon { display: grid; width: 36px; aspect-ratio: 1; place-items: center; border-radius: 11px; background: var(--lavender); color: var(--purple); }
+    .feature-icon.gold { background: #fff3d9; color: #bd8a1b; }
+    .feature strong, .feature small { display: block; }
+    .feature strong { font-size: 11px; }
+    .feature small { margin-top: 3px; color: #898799; font-size: 10px; }
+    .divider { width: 1px; height: 30px; background: var(--line); }
+    .start-card, .game-card, .result-card { border: 1px solid var(--line); border-radius: 16px; background: rgb(255 255 255 / 96%); box-shadow: 0 15px 48px rgb(48 41 89 / 7%); }
+    .start-card { padding: 25px 26px 21px; }
+    .card-topline { display: flex; justify-content: space-between; color: var(--muted); font-size: 9px; font-weight: 800; letter-spacing: .14em; }
+    .card-count { color: #a09eab; }
+    .category-list { display: grid; gap: 9px; margin-top: 17px; }
+    .category-option { display: flex; width: 100%; min-height: 67px; align-items: center; gap: 11px; border: 1px solid #eeedf2; border-radius: 10px; background: #fff; padding: 10px 12px; color: var(--ink); text-align: left; cursor: pointer; transition: border-color .16s, background .16s, transform .16s; }
+    .category-option:hover { transform: translateY(-1px); border-color: #c9c4f4; }
+    .category-option.selected { border-color: #a9a0ed; background: #f8f7ff; box-shadow: inset 3px 0 0 var(--purple); }
+    .category-symbol { display: grid; width: 35px; aspect-ratio: 1; flex: 0 0 auto; place-items: center; border-radius: 10px; background: var(--lavender); color: var(--purple); font-size: 19px; }
+    .category-copy { flex: 1; }
+    .category-copy strong, .category-copy small { display: block; }
+    .category-copy strong { font-size: 12px; }
+    .category-copy small { margin-top: 5px; color: #898799; font-size: 10px; }
+    .category-number { color: #aeacb9; font-size: 9px; font-weight: 700; }
+    .category-arrow { color: #aaa8b5; font-size: 18px; }
+    .selected .category-arrow { color: var(--purple); }
+    .primary-button, .next-button { display: inline-flex; min-height: 46px; align-items: center; justify-content: center; gap: 10px; border: 0; border-radius: 9px; background: var(--purple); padding: 0 17px; color: #fff; font-size: 12px; font-weight: 700; cursor: pointer; transition: background .16s, transform .16s; }
+    .primary-button:hover, .next-button:hover:not(:disabled) { transform: translateY(-1px); background: #5748ce; }
+    .start-card > .primary-button { width: 100%; margin-top: 18px; }
+    .card-footnote { margin: 12px 0 0; color: #9391a0; font-size: 10px; text-align: center; }
+    .game-wrap { width: min(100%, 690px); animation: appear 260ms ease both; }
+    .game-nav { display: flex; align-items: center; justify-content: space-between; margin-bottom: 14px; }
+    .back-button { display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent; padding: 8px 0; color: var(--muted); font-size: 11px; cursor: pointer; }
+    .back-button:hover { color: var(--purple); }
+    .game-category { border: 1px solid var(--line); border-radius: 999px; background: #fff; padding: 7px 11px; color: #666477; font-size: 10px; font-weight: 700; }
+    .game-card { padding: 29px 35px 24px; }
+    .progress-head { display: flex; align-items: center; justify-content: space-between; color: var(--muted); font-size: 10px; font-weight: 700; letter-spacing: .08em; }
+    .progress-head strong { margin-left: 3px; color: var(--purple); }
+    .progress-total { color: #a09eab; }
+    .score-pill { border-radius: 999px; background: #fff5dc; padding: 7px 10px; color: #9a7018; font-size: 10px; letter-spacing: 0; }
+    .progress-track { height: 5px; overflow: hidden; border-radius: 999px; background: #eeedf4; margin-top: 14px; }
+    .progress-track span { display: block; height: 100%; border-radius: inherit; background: linear-gradient(90deg, #6557d9, #978cf0); transition: width .3s ease; }
+    .question-title { margin: 27px 0 20px; font-size: clamp(22px, 3vw, 29px); line-height: 1.3; }
+    .answer-list { display: grid; grid-template-columns: 1fr 1fr; gap: 9px; }
+    .answer-option { display: flex; min-height: 56px; align-items: center; gap: 11px; border: 1px solid #ebe9f0; border-radius: 10px; background: #fff; padding: 9px 12px; color: var(--ink); text-align: left; cursor: pointer; transition: border-color .16s, background .16s; }
+    .answer-option:not(:disabled):hover { border-color: #a9a0ed; background: #faf9ff; }
+    .answer-option:disabled { cursor: default; }
+    .answer-letter { display: grid; width: 28px; aspect-ratio: 1; flex: 0 0 auto; place-items: center; border-radius: 8px; background: #f2f1f6; color: var(--muted); font-size: 10px; font-weight: 800; }
+    .answer-copy { flex: 1; font-size: 12px; line-height: 1.4; }
+    .answer-state { font-size: 17px; }
+    .answer-option.correct { border-color: #8ac8ad; background: #eff9f4; color: #226e50; }
+    .answer-option.correct .answer-letter { background: #d9f0e4; color: #247550; }
+    .answer-option.wrong { border-color: #e5a0a7; background: #fff2f3; color: #a83c49; }
+    .answer-option.wrong .answer-letter { background: #f9e0e3; color: #a83c49; }
+    .feedback { display: flex; min-height: 0; align-items: center; gap: 10px; overflow: hidden; }
+    .feedback.visible { min-height: 54px; margin-top: 12px; }
+    .feedback-icon { display: grid; width: 27px; aspect-ratio: 1; flex: 0 0 auto; place-items: center; border-radius: 50%; }
+    .feedback-good { background: #e0f3e9; color: #26805b; }
+    .feedback-try { background: #fff0d7; color: #a27618; }
+    .feedback-copy strong, .feedback-copy small { display: block; }
+    .feedback-copy strong { font-size: 11px; }
+    .feedback-copy small { margin-top: 3px; color: var(--muted); font-size: 10px; line-height: 1.4; }
+    .game-footer { display: flex; align-items: center; justify-content: space-between; border-top: 1px solid #efedf3; padding-top: 15px; }
+    .footer-hint { color: #9997a4; font-size: 10px; }
+    .next-button { min-height: 38px; gap: 8px; padding: 0 13px; font-size: 10px; }
+    .next-button:disabled { opacity: .4; cursor: not-allowed; }
+    .result-card { position: relative; width: min(100%, 560px); padding: 37px 42px 32px; text-align: center; animation: appear 300ms ease both; }
+    .result-icon { display: grid; width: 62px; aspect-ratio: 1; place-items: center; margin: 0 auto 18px; border-radius: 19px; background: #fff4d7; color: #ba8b22; font-size: 30px; }
+    .result-eyebrow { justify-content: center; }
+    .result-card h1 { margin: 15px 0 10px; font-family: Georgia, "Times New Roman", serif; font-size: clamp(25px, 4vw, 34px); }
+    .result-description { max-width: 390px; margin: 0 auto; color: var(--muted); font-size: 12px; line-height: 1.7; }
+    .score-summary { display: flex; align-items: center; justify-content: center; gap: 16px; margin: 23px auto; border: 1px solid #eeedf2; border-radius: 12px; background: #fbfaff; padding: 15px 19px; }
+    .score-big { color: var(--purple); font-size: 36px; font-weight: 800; }
+    .score-big span { color: #aaa7b6; font-size: 18px; }
+    .score-caption { color: var(--muted); font-size: 10px; line-height: 1.5; text-align: left; }
+    .score-separator { width: 1px; height: 36px; background: var(--line); }
+    .score-percent { font-size: 21px; font-weight: 800; }
+    .score-percent > span { color: var(--purple); font-size: 12px; }
+    .score-percent small { display: block; margin-top: 2px; color: #898799; font-size: 9px; font-weight: 500; }
+    .result-actions { display: flex; flex-direction: column; align-items: center; gap: 8px; }
+    .result-actions .primary-button { width: min(100%, 250px); }
+    .secondary-button { display: inline-flex; align-items: center; gap: 7px; border: 0; background: transparent; padding: 7px; color: var(--muted); font-size: 10px; cursor: pointer; }
+    .secondary-button:hover { color: var(--purple); }
+    .footer { position: relative; z-index: 1; display: flex; min-height: 48px; align-items: center; justify-content: space-between; border-top: 1px solid var(--line); color: #898799; font-size: 10px; }
+    @keyframes appear { from { opacity: 0; transform: translateY(7px); } to { opacity: 1; transform: translateY(0); } }
+
+    @media (max-width: 680px) {
+      .shell { padding: 0 20px; }
+      .topbar { min-height: 66px; }
+      .brand { font-size: 17px; }
+      .brand-mark { width: 30px; border-radius: 9px; }
+      .game-links { gap: 2px; }
+      .game-links a { padding: 8px 7px; font-size: 10px; }
+      .page-content { padding: 32px 0 38px; }
+      .intro-layout { display: flex; flex-direction: column; align-items: stretch; gap: 25px; }
+      .intro-copy h1 { margin: 16px 0 11px; font-size: clamp(40px, 11vw, 57px); }
+      .intro-description { font-size: 13px; }
+      .features { margin-top: 19px; }
+      .start-card { padding: 20px 17px 17px; }
+      .category-option { min-height: 62px; gap: 9px; padding: 8px; }
+      .category-copy strong { font-size: 11px; }
+      .category-copy small { font-size: 9px; }
+      .category-number { display: none; }
+      .game-card { border-radius: 14px; padding: 21px 17px 17px; }
+      .question-title { margin: 22px 0 16px; font-size: 22px; }
+      .answer-list { grid-template-columns: 1fr; gap: 8px; }
+      .answer-option { min-height: 49px; }
+      .answer-copy { font-size: 11px; }
+      .footer-hint { max-width: 130px; font-size: 9px; line-height: 1.4; }
+      .result-card { padding: 31px 18px 24px; }
+      .score-summary { gap: 10px; padding: 13px 10px; }
+      .score-big { font-size: 31px; }
+    }
+
+    @media (max-width: 380px) {
+      .shell { padding: 0 13px; }
+      .brand { font-size: 15px; }
+      .game-links a { padding: 7px 5px; font-size: 9px; }
+      .features { gap: 10px; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <main class="shell">
+    <header class="topbar">
+      <a class="brand" href="quiz.html" aria-label="quizzmandy, início do quiz"><span class="brand-mark" aria-hidden="true">?</span><span>quizzmandy<span class="brand-dot">.</span></span></a>
+      <nav class="game-links" aria-label="Jogos">
+        <a href="index.html">Amanda Funny Memory</a>
+        <a href="quiz.html" aria-current="page">Quiz dos planetas</a>
+      </nav>
+    </header>
+
+    <div class="page-content" id="app" aria-live="polite"></div>
+
+    <footer class="footer"><span>feito para mentes curiosas ✦</span><span>quizzmandy. &copy; 2026</span></footer>
+  </main>
+
+  <script>
+    const questionSets = {
+      geral: {
+        label: "Planetas rochosos",
+        symbol: "◉",
+        questions: [
+          { question: "Qual é o menor planeta do Sistema Solar?", options: ["Marte", "Mercúrio", "Vênus", "Terra"], answer: 1, note: "Mercúrio é também o planeta mais próximo do Sol." },
+          { question: "Qual planeta é conhecido como planeta vermelho?", options: ["Vênus", "Marte", "Júpiter", "Mercúrio"], answer: 1, note: "O óxido de ferro presente no solo dá a Marte sua aparência avermelhada." },
+          { question: "Qual planeta tem uma atmosfera tão densa que retém muito calor?", options: ["Vênus", "Marte", "Mercúrio", "Terra"], answer: 0, note: "O intenso efeito estufa faz de Vênus o planeta mais quente do Sistema Solar." },
+          { question: "Qual é o único planeta conhecido por abrigar vida?", options: ["Marte", "Vênus", "Terra", "Mercúrio"], answer: 2, note: "Até hoje, a Terra é o único mundo onde a vida foi confirmada." },
+          { question: "Qual planeta tem o dia mais longo em relação ao seu ano?", options: ["Marte", "Terra", "Vênus", "Mercúrio"], answer: 2, note: "Vênus leva cerca de 243 dias terrestres para girar uma vez e 225 para orbitar o Sol." },
+          { question: "Qual destes planetas não possui luas naturais?", options: ["Marte", "Terra", "Mercúrio", "Netuno"], answer: 2, note: "Mercúrio e Vênus são os únicos planetas sem luas." },
+          { question: "Quantas luas conhecidas Marte tem?", options: ["Nenhuma", "Uma", "Duas", "Quatro"], answer: 2, note: "As pequenas luas de Marte se chamam Fobos e Deimos." },
+          { question: "Qual planeta é o terceiro a partir do Sol?", options: ["Vênus", "Terra", "Marte", "Mercúrio"], answer: 1, note: "A ordem começa com Mercúrio, Vênus, Terra e Marte." }
+        ]
+      },
+      ciencia: {
+        label: "Gigantes gasosos e gelados",
+        symbol: "◎",
+        questions: [
+          { question: "Qual é o maior planeta do Sistema Solar?", options: ["Saturno", "Netuno", "Júpiter", "Urano"], answer: 2, note: "Júpiter é tão grande que todos os outros planetas caberiam dentro dele." },
+          { question: "Qual planeta é famoso por seus grandes anéis brilhantes?", options: ["Urano", "Saturno", "Netuno", "Júpiter"], answer: 1, note: "Os anéis de Saturno são feitos principalmente de gelo, poeira e fragmentos rochosos." },
+          { question: "Qual planeta tem ventos que podem ultrapassar 2.000 km/h?", options: ["Júpiter", "Saturno", "Urano", "Netuno"], answer: 3, note: "Netuno tem alguns dos ventos mais velozes já registrados no Sistema Solar." },
+          { question: "Que planeta gira quase de lado em relação ao plano de sua órbita?", options: ["Saturno", "Urano", "Júpiter", "Netuno"], answer: 1, note: "A inclinação extrema de Urano faz com que ele pareça rolar ao redor do Sol." },
+          { question: "Qual destes planetas tem a Grande Mancha Vermelha?", options: ["Marte", "Júpiter", "Saturno", "Netuno"], answer: 1, note: "É uma tempestade gigantesca em Júpiter, observada há séculos." },
+          { question: "Qual é o planeta mais distante do Sol?", options: ["Urano", "Saturno", "Netuno", "Júpiter"], answer: 2, note: "Netuno é o oitavo planeta, depois de Urano." },
+          { question: "Qual gigante gasoso tem a menor densidade média?", options: ["Júpiter", "Saturno", "Urano", "Netuno"], answer: 1, note: "A densidade média de Saturno é menor que a da água." },
+          { question: "Qual planeta tem uma cor azulada por causa do metano em sua atmosfera?", options: ["Vênus", "Marte", "Netuno", "Mercúrio"], answer: 2, note: "O metano absorve luz avermelhada e ajuda a dar a Netuno sua tonalidade azul." }
+        ]
+      },
+      cultura: {
+        label: "Explorando o Sistema Solar",
+        symbol: "✦",
+        questions: [
+          { question: "Quantos planetas existem no Sistema Solar?", options: ["Sete", "Oito", "Nove", "Dez"], answer: 1, note: "A União Astronômica Internacional reconhece oito planetas." },
+          { question: "Qual planeta fica entre a Terra e Júpiter?", options: ["Vênus", "Marte", "Saturno", "Mercúrio"], answer: 1, note: "A ordem é Terra, Marte e depois Júpiter." },
+          { question: "Qual planeta completa uma volta ao redor do Sol mais rapidamente?", options: ["Vênus", "Mercúrio", "Marte", "Terra"], answer: 1, note: "Um ano em Mercúrio dura apenas 88 dias terrestres." },
+          { question: "Qual destes corpos é classificado como planeta anão?", options: ["Europa", "Plutão", "Titã", "Fobos"], answer: 1, note: "Plutão foi reclassificado como planeta anão em 2006." },
+          { question: "O que mantém os planetas em órbita ao redor do Sol?", options: ["Magnetismo", "Gravidade", "Vento solar", "Luz"], answer: 1, note: "A gravidade do Sol mantém os planetas em suas órbitas." },
+          { question: "Qual planeta tem o maior número de luas confirmadas entre estas opções?", options: ["Terra", "Marte", "Júpiter", "Mercúrio"], answer: 2, note: "Júpiter tem dezenas de luas conhecidas, incluindo Ganimedes, a maior do Sistema Solar." },
+          { question: "Qual é a estrela no centro do nosso Sistema Solar?", options: ["Sirius", "O Sol", "Polaris", "Vega"], answer: 1, note: "O Sol é uma estrela que fornece luz e energia aos planetas." },
+          { question: "Qual sequência começa no planeta mais próximo do Sol?", options: ["Vênus, Terra, Mercúrio", "Mercúrio, Vênus, Terra", "Terra, Marte, Vênus", "Marte, Terra, Mercúrio"], answer: 1, note: "A sequência completa começa com Mercúrio, Vênus, Terra e Marte." }
+        ]
+      }
+    };
+
+    const letters = ["A", "B", "C", "D"];
+    const app = document.querySelector("#app");
+    let category = "geral";
+    let screen = "intro";
+    let questionIndex = 0;
+    let selected = null;
+    let score = 0;
+
+    function playCorrectTune() {
+      const AudioContextClass = window.AudioContext || window.webkitAudioContext;
+      if (!AudioContextClass) return;
+
+      try {
+        const context = new AudioContextClass();
+        const masterGain = context.createGain();
+        const startAt = context.currentTime;
+        masterGain.gain.setValueAtTime(0.18, startAt);
+        masterGain.connect(context.destination);
+
+        [523.25, 659.25, 783.99, 1046.5].forEach((frequency, index, notes) => {
+          const oscillator = context.createOscillator();
+          const noteGain = context.createGain();
+          const noteStart = startAt + index * 0.1;
+          oscillator.type = "sine";
+          oscillator.frequency.setValueAtTime(frequency, noteStart);
+          noteGain.gain.setValueAtTime(0.0001, noteStart);
+          noteGain.gain.exponentialRampToValueAtTime(0.28, noteStart + 0.025);
+          noteGain.gain.exponentialRampToValueAtTime(0.0001, noteStart + 0.28);
+          oscillator.connect(noteGain);
+          noteGain.connect(masterGain);
+          oscillator.start(noteStart);
+          oscillator.stop(noteStart + 0.29);
+          if (index === notes.length - 1) oscillator.addEventListener("ended", () => void context.close(), { once: true });
+        });
+      } catch {
+        // O som é opcional; a resposta continua funcionando se o navegador bloquear áudio.
+      }
+    }
+
+    function startQuiz() {
+      questionIndex = 0;
+      selected = null;
+      score = 0;
+      screen = "playing";
+      render();
+    }
+
+    function chooseAnswer(index) {
+      if (selected !== null) return;
+      selected = index;
+      if (index === questionSets[category].questions[questionIndex].answer) {
+        score += 1;
+        playCorrectTune();
+      }
+      render();
+    }
+
+    function renderIntro() {
+      const categories = Object.entries(questionSets).map(([key, set], index) => `
+        <button class="category-option ${category === key ? "selected" : ""}" data-action="category" data-category="${key}" aria-pressed="${category === key}">
+          <span class="category-symbol" aria-hidden="true">${set.symbol}</span>
+          <span class="category-copy"><strong>${set.label}</strong><small>8 perguntas · nível descontraído</small></span>
+          <span class="category-number">0${index + 1}</span><span class="category-arrow" aria-hidden="true">›</span>
+        </button>
+      `).join("");
+
+      app.innerHTML = `
+        <section class="intro-layout" aria-labelledby="intro-title">
+          <div class="intro-copy">
+            <div class="eyebrow"><span class="eyebrow-line"></span> CURIOSIDADE EM AÇÃO</div>
+            <h1 id="intro-title">Uma viagem<br>pelo <span class="highlight">cosmos.</span></h1>
+            <p class="intro-description">Oito perguntas sobre os planetas do nosso Sistema Solar. Escolha um percurso e descubra curiosidades a cada resposta.</p>
+            <div class="features">
+              <div class="feature"><span class="feature-icon" aria-hidden="true">?</span><span><strong>8 perguntas</strong><small>por rodada</small></span></div>
+              <span class="divider"></span>
+              <div class="feature"><span class="feature-icon gold" aria-hidden="true">★</span><span><strong>Sem pressão</strong><small>no seu ritmo</small></span></div>
+            </div>
+          </div>
+          <section class="start-card" aria-label="Escolha o tema do quiz">
+            <div class="card-topline"><span>ESCOLHA SEU TEMA</span><span class="card-count">01 — 03</span></div>
+            <div class="category-list">${categories}</div>
+            <button class="primary-button" data-action="start">Começar o quiz <span aria-hidden="true">→</span></button>
+            <p class="card-footnote">Sem cadastro. Só diversão e conhecimento.</p>
+          </section>
+        </section>
+      `;
+    }
+
+    function renderGame() {
+      const currentSet = questionSets[category];
+      const currentQuestion = currentSet.questions[questionIndex];
+      const total = currentSet.questions.length;
+      const answers = currentQuestion.options.map((option, index) => {
+        const isCorrect = selected !== null && index === currentQuestion.answer;
+        const isWrong = selected === index && index !== currentQuestion.answer;
+        const stateIcon = isCorrect ? "✓" : isWrong ? "×" : "";
+        return `
+          <button class="answer-option ${isCorrect ? "correct" : ""} ${isWrong ? "wrong" : ""}" data-action="answer" data-answer="${index}" ${selected !== null ? "disabled" : ""} aria-pressed="${selected === index}">
+            <span class="answer-letter">${letters[index]}</span><span class="answer-copy">${option}</span><span class="answer-state" aria-hidden="true">${stateIcon}</span>
+          </button>
+        `;
+      }).join("");
+      const feedback = selected === null ? "" : `
+        <div class="feedback visible" aria-live="polite" aria-atomic="true">
+          <span class="feedback-icon ${selected === currentQuestion.answer ? "feedback-good" : "feedback-try"}" aria-hidden="true">${selected === currentQuestion.answer ? "✓" : "×"}</span>
+          <span class="feedback-copy"><strong>${selected === currentQuestion.answer ? "Resposta certa!" : "Quase!"}</strong><small>${currentQuestion.note}</small></span>
+        </div>
+      `;
+
+      app.innerHTML = `
+        <section class="game-wrap" aria-labelledby="question-title">
+          <div class="game-nav"><button class="back-button" data-action="exit"><span aria-hidden="true">←</span> Sair do quiz</button><span class="game-category">${currentSet.symbol} &nbsp;${currentSet.label}</span></div>
+          <div class="game-card">
+            <div class="progress-head"><span>PERGUNTA <strong>${String(questionIndex + 1).padStart(2, "0")}</strong><span class="progress-total"> / ${String(total).padStart(2, "0")}</span></span><span class="score-pill">★ &nbsp;${score} ${score === 1 ? "ponto" : "pontos"}</span></div>
+            <div class="progress-track" role="progressbar" aria-label="Progresso do quiz" aria-valuenow="${questionIndex + 1}" aria-valuemin="0" aria-valuemax="${total}"><span style="width:${((questionIndex + 1) / total) * 100}%"></span></div>
+            <h2 class="question-title" id="question-title">${currentQuestion.question}</h2>
+            <div class="answer-list" role="group" aria-label="Alternativas de resposta">${answers}</div>
+            ${feedback}
+            <div class="game-footer"><span class="footer-hint">Escolha uma alternativa para continuar</span><button class="next-button" data-action="next" ${selected === null ? "disabled" : ""}>${questionIndex + 1 === total ? "Ver resultado" : "Próxima pergunta"} <span aria-hidden="true">→</span></button></div>
+          </div>
+        </section>
+      `;
+    }
+
+    function renderResult() {
+      const total = questionSets[category].questions.length;
+      const title = score === total ? "Incrível! Você gabaritou!" : score >= total * 0.65 ? "Mandou muito bem!" : score >= total * 0.35 ? "Boa! Você está no caminho." : "Que tal tentar de novo?";
+      app.innerHTML = `
+        <section class="result-card" aria-labelledby="result-title">
+          <div class="result-icon" aria-hidden="true">★</div>
+          <div class="eyebrow result-eyebrow"><span class="eyebrow-line"></span> FIM DE JOGO <span class="eyebrow-line"></span></div>
+          <h1 id="result-title">${title}</h1>
+          <p class="result-description">Você concluiu o tema <strong>${questionSets[category].label}</strong>. Cada rodada é uma chance de descobrir algo novo.</p>
+          <div class="score-summary"><span class="score-big">${score}<span>/${total}</span></span><span class="score-caption">respostas<br>corretas</span><span class="score-separator"></span><span class="score-percent">${Math.round((score / total) * 100)}<span>%</span><small>de aproveitamento</small></span></div>
+          <div class="result-actions"><button class="primary-button" data-action="restart"><span aria-hidden="true">↻</span> Jogar novamente</button><button class="secondary-button" data-action="home">Escolher outro tema <span aria-hidden="true">→</span></button></div>
+        </section>
+      `;
+    }
+
+    function render() {
+      if (screen === "intro") renderIntro();
+      else if (screen === "playing") renderGame();
+      else renderResult();
+    }
+
+    app.addEventListener("click", (event) => {
+      const button = event.target.closest("button[data-action]");
+      if (!button) return;
+
+      const action = button.dataset.action;
+      if (action === "category") {
+        category = button.dataset.category;
+        renderIntro();
+      } else if (action === "start" || action === "restart") {
+        startQuiz();
+      } else if (action === "answer") {
+        chooseAnswer(Number(button.dataset.answer));
+      } else if (action === "next") {
+        if (selected === null) return;
+        if (questionIndex + 1 === questionSets[category].questions.length) screen = "result";
+        else {
+          questionIndex += 1;
+          selected = null;
+          screen = "playing";
+        }
+        render();
+      } else if (action === "exit" || action === "home") {
+        screen = "intro";
+        render();
+      }
+    });
+
+    render();
+  </script>
+</body>
+</html>

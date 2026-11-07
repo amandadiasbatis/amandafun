@@ -76,6 +76,26 @@
       text-transform: uppercase;
     }
 
+    .game-nav {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .game-nav a {
+      padding: 8px 10px;
+      border-radius: 8px;
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 700;
+      text-decoration: none;
+    }
+
+    .game-nav a:hover, .game-nav a[aria-current="page"] {
+      background: #e2eee3;
+      color: var(--leaf-dark);
+    }
+
     .intro { margin-bottom: 24px; }
 
     .eyebrow {
@@ -254,7 +274,8 @@
     @media (max-width: 520px) {
       .page { width: min(100% - 24px, 440px); padding-top: 18px; }
       .topbar { margin-bottom: 26px; }
-      .edition { font-size: 10px; }
+      .topbar { align-items: flex-start; flex-direction: column; gap: 10px; padding-bottom: 14px; }
+      .game-nav a { padding: 7px 8px; font-size: 10px; }
       .game-panel { padding: 16px; border-radius: 16px; }
       .game-topline { align-items: stretch; flex-direction: column; }
       .stats { display: grid; grid-template-columns: 1fr 1fr; }
@@ -273,7 +294,10 @@
   <main class="page">
     <header class="topbar">
       <div class="brand"><span class="brand-mark" aria-hidden="true">🐾</span> Amanda Funny Memory</div>
-      <div class="edition">Primeira Edição</div>
+      <nav class="game-nav" aria-label="Jogos">
+        <a href="index.html" aria-current="page">Jogo da memória</a>
+        <a href="quiz.html">Quiz dos planetas</a>
+      </nav>
     </header>
 
     <section class="intro" aria-labelledby="page-title">
