@@ -3,8 +3,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#d9f0e2">
-  <title>Amanda Funny Memory | Jogo da memória</title>
+  <meta name="theme-color" content="#f3f6f0">
+  <title>quizzmandy | Jogos e quizzes</title>
   <style>
     :root {
       color-scheme: light;
@@ -289,24 +289,57 @@
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
   </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <main class="page">
     <header class="topbar">
-      <div class="brand"><span class="brand-mark" aria-hidden="true">🐾</span> Amanda Funny Memory</div>
+      <a class="brand" href="index.html" aria-label="quizzmandy, início"><span class="brand-mark" aria-hidden="true">?</span><span>quizzmandy<span class="brand-dot">.</span></span></a>
       <nav class="game-nav" aria-label="Jogos">
-        <a href="index.html" aria-current="page">Jogo da memória</a>
-        <a href="quiz.html">Quiz dos planetas</a>
+        <a id="home-link" href="#jogos" aria-current="page">Início</a>
+        <a href="quiz.html">Planetas</a>
       </nav>
     </header>
 
-    <section class="intro" aria-labelledby="page-title">
-      <p class="eyebrow">Observe · memorize · combine</p>
-      <h1 id="page-title">Encontre os doguinhos</h1>
-      <p class="subtitle">Vire as cartas e descubra o que está escondido.</p>
+    <section class="portal-view" id="home-view" aria-labelledby="home-title">
+      <div class="portal-intro">
+        <p class="eyebrow">JOGOS E CURIOSIDADES</p>
+        <h1 id="home-title" tabindex="-1">Escolha seu desafio.</h1>
+        <p>Encontre os pares de animais ou explore curiosidades sobre os planetas.</p>
+      </div>
+
+      <div class="experience-grid" id="jogos">
+        <button class="experience-card" id="animais" type="button" data-action="start-memory">
+          <span class="experience-art experience-art--animals"><img src="Animais/animal1.jpeg" alt="" fetchpriority="high"></span>
+          <span class="experience-copy">
+            <span class="experience-kicker">MEMÓRIA · ANIMAIS</span>
+            <span class="experience-title">Encontre os animais</span>
+            <span class="experience-description">Vire as cartas e combine os 10 pares escondidos.</span>
+            <span class="experience-cta">Jogar <span aria-hidden="true">→</span></span>
+          </span>
+        </button>
+
+        <a class="experience-card" href="quiz.html">
+          <span class="experience-art experience-art--planets" aria-hidden="true"><span>🪐</span></span>
+          <span class="experience-copy">
+            <span class="experience-kicker">QUIZ · SISTEMA SOLAR</span>
+            <span class="experience-title">Uma viagem pelos planetas</span>
+            <span class="experience-description">Escolha um tema, responda e descubra fatos do cosmos.</span>
+            <span class="experience-cta">Escolher tema <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
+      </div>
+      <footer class="portal-footer">quizzmandy. <span>Aprender também pode ser divertido.</span></footer>
     </section>
 
-    <section class="game-panel" aria-label="Jogo da memória de animais">
+    <section class="animal-view is-hidden" id="animal-game" aria-labelledby="page-title" aria-hidden="true">
+      <section class="intro" aria-labelledby="page-title">
+        <p class="eyebrow">OBSERVE · MEMORIZE · COMBINE</p>
+        <h1 id="page-title" tabindex="-1">Encontre os animais</h1>
+        <p class="subtitle">Vire as cartas e descubra o que está escondido.</p>
+      </section>
+
+      <section class="game-panel" aria-label="Jogo da memória de animais">
       <div class="game-topline">
         <div class="stats" aria-label="Placar">
           <div class="stat">
@@ -323,6 +356,7 @@
 
       <div class="board" id="board" aria-label="Tabuleiro com 20 cartas"></div>
       <p class="status" id="status" role="status" aria-live="polite">Encontre os 10 pares para vencer.</p>
+      </section>
     </section>
   </main>
 
@@ -336,6 +370,12 @@
     const pairsDisplay = document.querySelector("#pairs");
     const statusDisplay = document.querySelector("#status");
     const newGameButton = document.querySelector("#new-game");
+    const homeView = document.querySelector("#home-view");
+    const animalView = document.querySelector("#animal-game");
+    const homeLink = document.querySelector("#home-link");
+    const animalStartButton = document.querySelector("#animais");
+    const homeTitle = document.querySelector("#home-title");
+    const animalTitle = document.querySelector("#page-title");
 
     let firstCard = null;
     let secondCard = null;
@@ -394,6 +434,22 @@
       board.replaceChildren(...shuffledCards().map(createCard));
     }
 
+    function showAnimalGame() {
+      startGame();
+      homeView.classList.add("is-hidden");
+      animalView.classList.remove("is-hidden");
+      animalView.setAttribute("aria-hidden", "false");
+      animalTitle.focus();
+    }
+
+    function showHome() {
+      window.clearTimeout(mismatchTimer);
+      homeView.classList.remove("is-hidden");
+      animalView.classList.add("is-hidden");
+      animalView.setAttribute("aria-hidden", "true");
+      homeTitle.focus();
+    }
+
     function flipCard(card, index) {
       if (locked || card === firstCard || card.classList.contains("is-matched")) return;
 
@@ -445,8 +501,14 @@
       }, 850);
     }
 
+    animalStartButton.addEventListener("click", showAnimalGame);
     newGameButton.addEventListener("click", startGame);
-    startGame();
+    homeLink.addEventListener("click", (event) => {
+      if (!animalView.classList.contains("is-hidden")) {
+        event.preventDefault();
+        showHome();
+      }
+    });
   </script>
 </body>
 </html>

@@ -165,14 +165,16 @@
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
+  <link rel="stylesheet" href="site.css">
 </head>
 <body>
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="quiz.html" aria-label="quizzmandy, início do quiz"><span class="brand-mark" aria-hidden="true">?</span><span>quizzmandy<span class="brand-dot">.</span></span></a>
+      <a class="brand" href="index.html" aria-label="quizzmandy, início"><span class="brand-mark" aria-hidden="true">?</span><span>quizzmandy<span class="brand-dot">.</span></span></a>
       <nav class="game-links" aria-label="Jogos">
-        <a href="index.html">Amanda Funny Memory</a>
-        <a href="quiz.html" aria-current="page">Quiz dos planetas</a>
+        <a href="index.html">Início</a>
+        <a href="index.html#animais">Animais</a>
+        <a href="quiz.html" aria-current="page">Planetas</a>
       </nav>
     </header>
 
@@ -288,8 +290,8 @@
       const categories = Object.entries(questionSets).map(([key, set], index) => `
         <button class="category-option ${category === key ? "selected" : ""}" data-action="category" data-category="${key}" aria-pressed="${category === key}">
           <span class="category-symbol" aria-hidden="true">${set.symbol}</span>
-          <span class="category-copy"><strong>${set.label}</strong><small>8 perguntas · nível descontraído</small></span>
-          <span class="category-number">0${index + 1}</span><span class="category-arrow" aria-hidden="true">›</span>
+          <span class="category-copy"><strong>${set.label}</strong><small>${set.questions.length} perguntas · nível descontraído</small></span>
+          <span class="category-number">${String(index + 1).padStart(2, "0")}</span><span class="category-arrow" aria-hidden="true">›</span>
         </button>
       `).join("");
 
@@ -298,15 +300,15 @@
           <div class="intro-copy">
             <div class="eyebrow"><span class="eyebrow-line"></span> CURIOSIDADE EM AÇÃO</div>
             <h1 id="intro-title">Uma viagem<br>pelo <span class="highlight">cosmos.</span></h1>
-            <p class="intro-description">Oito perguntas sobre os planetas do nosso Sistema Solar. Escolha um percurso e descubra curiosidades a cada resposta.</p>
+            <p class="intro-description">Escolha um percurso pelo Sistema Solar e descubra curiosidades a cada resposta.</p>
             <div class="features">
-              <div class="feature"><span class="feature-icon" aria-hidden="true">?</span><span><strong>8 perguntas</strong><small>por rodada</small></span></div>
+              <div class="feature"><span class="feature-icon" aria-hidden="true">?</span><span><strong>Temas variados</strong><small>para explorar</small></span></div>
               <span class="divider"></span>
               <div class="feature"><span class="feature-icon gold" aria-hidden="true">★</span><span><strong>Sem pressão</strong><small>no seu ritmo</small></span></div>
             </div>
           </div>
           <section class="start-card" aria-label="Escolha o tema do quiz">
-            <div class="card-topline"><span>ESCOLHA SEU TEMA</span><span class="card-count">01 — 03</span></div>
+            <div class="card-topline"><span>ESCOLHA SEU TEMA</span><span class="card-count">${String(Object.keys(questionSets).length).padStart(2, "0")} temas</span></div>
             <div class="category-list">${categories}</div>
             <button class="primary-button" data-action="start">Começar o quiz <span aria-hidden="true">→</span></button>
             <p class="card-footnote">Sem cadastro. Só diversão e conhecimento.</p>
