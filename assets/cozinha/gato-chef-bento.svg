@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256" role="img">
+  <defs>
+    <linearGradient id="fur" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#48444a"/>
+      <stop offset="1" stop-color="#201e24"/>
+    </linearGradient>
+    <linearGradient id="coat" x1="0" y1="0" x2="0.9" y2="1">
+      <stop offset="0" stop-color="#fff"/>
+      <stop offset="1" stop-color="#e3e1df"/>
+    </linearGradient>
+  </defs>
+  <rect width="256" height="256" fill="#d9e7e2"/>
+  <circle cx="128" cy="128" r="115" fill="#edf3ed"/>
+  <path d="M37 256c3-39 17-64 49-78l42-12 42 12c32 14 46 39 49 78z" fill="url(#coat)" stroke="#bdbab5" stroke-width="4"/>
+  <path d="m93 174 35 25 35-25 16 82H77z" fill="#bd4937"/>
+  <path d="m97 175 31 25-22 25-27-48zm62 0-31 25 22 25 27-48z" fill="#fff" stroke="#cbc8c2" stroke-width="3" stroke-linejoin="round"/>
+  <path d="M127 200h3v7h-3zm0 17h3v7h-3zm0 17h3v7h-3z" fill="#938679"/>
+  <path d="M63 88 50 39c-2-9 6-14 14-8l42 35m86 22 14-48c3-10-5-15-13-9l-44 32" fill="url(#fur)" stroke="#17161a" stroke-width="6" stroke-linejoin="round"/>
+  <path d="M57 112c0-41 31-70 71-70s71 29 71 70v20c0 41-31 67-71 67s-71-26-71-67z" fill="url(#fur)" stroke="#17161a" stroke-width="5"/>
+  <path d="M64 120c0-29 17-50 37-54-7 18-1 35 1 50 3 18-7 42-22 48-10-10-16-25-16-44zm128 0c0-29-17-50-37-54 7 18 1 35-1 50-3 18 7 42 22 48 10-10 16-25 16-44z" fill="#fff"/>
+  <path d="M88 146c10-8 22-8 32 0m16 0c10-8 22-8 32 0" fill="none" stroke="#343039" stroke-width="5" stroke-linecap="round"/>
+  <ellipse cx="101" cy="151" rx="4" ry="6" fill="#b9c68a"/>
+  <ellipse cx="155" cy="151" rx="4" ry="6" fill="#b9c68a"/>
+  <path d="M121 160q7-7 14 0-7 8-14 0" fill="#bd6e76"/>
+  <path d="M128 167q-9 10-17 2m17-2q9 10 17 2" fill="none" stroke="#47414a" stroke-width="3" stroke-linecap="round"/>
+  <path d="M92 163 61 158m34 16-31 8m101-19 31-5m-34 21 32 8" fill="none" stroke="#f8f6f1" stroke-width="3" stroke-linecap="round"/>
+  <path d="M82 34c-6-10 3-20 13-17 0-12 16-16 24-7 7-13 25-10 28 3 12-6 24 4 19 16 10 3 12 16 4 23H78c-9-5-7-15 4-18" fill="#fff" stroke="#c9c7c3" stroke-width="4" stroke-linejoin="round"/>
+  <path d="M76 53h96" stroke="#c94c37" stroke-width="7" stroke-linecap="round"/>
+</svg>

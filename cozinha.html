@@ -45,11 +45,9 @@
     h1 { max-width: 640px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(37px, 6vw, 58px); line-height: 1.04; }
     .intro-copy > p:last-child { max-width: 560px; margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
     .chef-portraits { display: flex; align-items: center; padding: 5px 8px; }
-    .chef-avatar { position: relative; width: clamp(68px, 9vw, 92px); aspect-ratio: 1; margin-left: -13px; overflow: hidden; border: 4px solid var(--bg); border-radius: 50%; background: #e8c99e; box-shadow: 0 4px 14px rgb(76 48 24 / 16%); }
+    .chef-avatar { position: relative; width: clamp(82px, 10vw, 110px); aspect-ratio: 1; margin-left: -15px; overflow: hidden; border: 4px solid var(--bg); border-radius: 50%; background: #e8c99e; box-shadow: 0 4px 14px rgb(76 48 24 / 16%); }
     .chef-avatar:first-child { margin-left: 0; }
     .chef-avatar img { width: 100%; height: 100%; object-fit: cover; }
-    .chef-avatar::after { position: absolute; top: -1px; right: 7px; width: 22px; height: 12px; border: 2px solid #fff; border-radius: 55% 55% 35% 35%; background: #fff; box-shadow: 0 4px 0 -2px #fff; content: ""; }
-
     .game-panel { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: rgb(255 253 248 / 94%); box-shadow: var(--shadow); }
     .scorebar { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); background: #fffaf1; padding: 14px 18px; }
     .score-group { display: flex; flex-wrap: wrap; gap: 9px; }
@@ -73,14 +71,98 @@
     .recipe-step.is-done { color: #4e8156; font-weight: 800; }
     .recipe-step.is-done .step-check { border-color: #76ad7b; background: #e6f4df; color: #397542; }
     .ticket-footer { margin-top: 12px; border-top: 1px dashed #dbc8af; padding-top: 9px; color: #89745e; font-size: 9px; font-weight: 700; }
+    .customer-voice { display: flex; align-items: center; gap: 9px; margin-top: 12px; border-top: 1px dashed #dbc8af; padding-top: 10px; }
+    .customer-avatar { display: grid; width: 40px; height: 40px; flex: 0 0 auto; place-items: center; border: 2px solid #fff; border-radius: 50%; background: #f7e2c6; box-shadow: 0 2px 8px rgb(76 48 24 / 12%); font-size: 22px; }
+    .customer-name { display: block; margin-bottom: 3px; color: #79513a; font-size: 9px; font-weight: 900; }
+    .customer-speech { margin: 0; color: #66503e; font-size: 9px; font-weight: 700; line-height: 1.4; }
 
-    .chef-stage { display: grid; min-height: 236px; place-items: center; align-content: center; overflow: hidden; border: 1px solid #ead8b8; border-radius: 12px; background: radial-gradient(ellipse at 50% 77%, #f5d9a8 0 37%, transparent 38%), linear-gradient(180deg, #fff3d8, #fffaf0); padding: 12px; }
-    .speech { position: relative; max-width: 100%; min-height: 39px; margin: 0 0 9px; border: 1px solid #f0dfc8; border-radius: 12px; background: #fff; padding: 9px 11px; color: #66503e; font-size: 10px; font-weight: 700; line-height: 1.35; text-align: center; }
-    .speech::after { position: absolute; bottom: -6px; left: calc(50% - 5px); width: 10px; height: 10px; transform: rotate(45deg); border-right: 1px solid #f0dfc8; border-bottom: 1px solid #f0dfc8; background: #fff; content: ""; }
-    .chef-portrait { position: relative; width: min(100%, 148px); aspect-ratio: 1; overflow: hidden; border: 5px solid #fff; border-radius: 50%; background: #e9c99e; box-shadow: 0 7px 22px rgb(99 65 34 / 15%); }
-    .chef-portrait::after { position: absolute; top: 0; left: calc(50% - 17px); width: 34px; height: 21px; border: 2px solid #fff; border-radius: 50% 50% 20% 20%; background: #fff; box-shadow: 0 5px 0 -2px #fff, 0 6px 0 -3px #d4b68f; content: ""; }
+    .stove-stage { display: flex; min-height: 300px; flex-direction: column; overflow: hidden; border: 1px solid #ead8b8; border-radius: 12px; background: #fff8ec; padding: 10px; }
+    .chef-tip { display: flex; min-height: 45px; align-items: center; gap: 8px; margin-bottom: 8px; }
+    .chef-portrait { position: relative; width: 60px; height: 60px; flex: 0 0 auto; overflow: hidden; border: 3px solid #fff; border-radius: 50%; background: #e9c99e; box-shadow: 0 3px 10px rgb(99 65 34 / 14%); }
     .chef-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
-    .chef-name { margin: 8px 0 0; color: #79513a; font-size: 10px; font-weight: 900; }
+    .speech { position: relative; flex: 1; min-height: 34px; margin: 0; border: 1px solid #f0dfc8; border-radius: 10px; background: #fff; padding: 8px 10px; color: #66503e; font-size: 9px; font-weight: 700; line-height: 1.35; }
+    .speech::before { position: absolute; top: calc(50% - 4px); left: -5px; width: 8px; height: 8px; transform: rotate(45deg); border-bottom: 1px solid #f0dfc8; border-left: 1px solid #f0dfc8; background: #fff; content: ""; }
+    .stove-scene { position: relative; display: grid; min-height: 150px; flex: 1; place-items: center; overflow: hidden; border: 1px solid #e6d3b5; border-radius: 10px; background: linear-gradient(#f8e8ce 0 65%, #ca9770 65% 69%, #a96848 69%); }
+    .stove-scene::before { position: absolute; inset: 0 0 35%; background-image: linear-gradient(90deg, transparent 48%, rgb(167 129 93 / 14%) 49% 51%, transparent 52%), linear-gradient(transparent 48%, rgb(167 129 93 / 14%) 49% 51%, transparent 52%); background-size: 42px 28px; content: ""; }
+    .stove-scene.is-grilling { background: linear-gradient(#f8e8ce 0 64%, #ca9770 64% 68%, #a96848 68%); }
+    .stove-surface { position: absolute; right: 12%; bottom: 11px; left: 12%; height: 15px; border: 2px solid #606067; border-radius: 5px; background: linear-gradient(#44434b, #222229); box-shadow: 0 5px 0 #8e5037, 0 8px 8px rgb(64 38 27 / 22%); }
+    .burner { position: absolute; z-index: 1; bottom: 28px; left: 50%; width: 100px; height: 17px; transform: translateX(-50%); border: 4px solid #4d4440; border-radius: 50%; background: #201d1c; box-shadow: inset 0 0 0 3px #a4815b, 0 2px 3px rgb(53 36 25 / 30%); }
+    .flames { position: absolute; z-index: 2; bottom: 35px; left: 50%; display: flex; width: 70px; height: 42px; align-items: flex-end; justify-content: center; gap: 2px; transform: translateX(-50%); opacity: 0; transition: opacity 180ms ease; }
+    .flame { width: 17px; height: 32px; transform-origin: 50% 100%; clip-path: polygon(50% 0, 68% 31%, 95% 21%, 86% 58%, 100% 76%, 80% 100%, 20% 100%, 0 77%, 17% 53%, 29% 26%); background: linear-gradient(0deg, #ff572f 0 14%, #ff9a32 42%, #ffe36b 78%, #fff8bd); filter: drop-shadow(0 0 6px rgb(255 122 39 / 65%)); }
+    .flame:nth-child(2) { width: 19px; height: 42px; }
+    .flame:nth-child(3) { height: 35px; }
+    .stove-scene.is-lit .flames { opacity: 1; }
+    .stove-scene.is-grilling .flames { bottom: 27px; height: 48px; }
+    .stove-scene.is-grilling .flame { height: 41px; }
+    .stove-scene.is-grilling .flame:nth-child(2) { height: 48px; }
+    .stove-scene.is-lit .flame { animation: flame-flicker 350ms ease-in-out infinite alternate; }
+    .stove-scene.is-lit .flame:nth-child(2) { animation-delay: 130ms; }
+    .stove-scene.is-lit .flame:nth-child(3) { animation-delay: 220ms; }
+    .cook-pan { position: absolute; z-index: 3; bottom: 52px; left: 50%; width: 126px; height: 63px; transform: translateX(-50%); transform-origin: 50% 90%; border: 5px solid #73777b; border-top: 8px solid #aaaeb0; border-radius: 8px 8px 48px 48px; background: radial-gradient(ellipse at 50% 4%, #654130 0 63%, #382a25 66%); box-shadow: 0 6px 8px rgb(64 38 27 / 27%), inset 0 -7px 0 rgb(255 255 255 / 13%); }
+    .cook-pan::before { position: absolute; top: 1px; right: -49px; width: 50px; height: 12px; transform: rotate(-8deg); transform-origin: left center; border: 4px solid #54575b; border-left: 0; border-radius: 0 70% 70% 0; background: #292a2d; content: ""; }
+    .pan-food { position: absolute; inset: 4px 9px 9px; display: flex; align-items: center; justify-content: center; gap: 3px; overflow: hidden; font-size: 18px; }
+    .pan-food span { display: inline-block; animation: food-drop 300ms ease both; }
+    .grill-firebox, .grill-grate, .grill-food { display: none; }
+    .stove-scene.is-grilling .stove-surface,
+    .stove-scene.is-grilling .burner,
+    .stove-scene.is-grilling .cook-pan,
+    .stove-scene.is-grilling .stove-knobs,
+    .stove-scene.is-grilling .stove-label { display: none; }
+    .stove-scene.is-grilling .grill-firebox { position: absolute; right: 15%; bottom: 15px; left: 15%; display: block; height: 45px; border: 4px solid #493c36; border-radius: 8px 8px 18px 18px; background: linear-gradient(#4b3b32, #282324); box-shadow: 0 6px 0 #8e5037, 0 8px 8px rgb(64 38 27 / 22%); }
+    .stove-scene.is-grilling .grill-firebox::before { position: absolute; inset: 15px 10px 6px; border-radius: 50%; background: repeating-linear-gradient(90deg, #332629 0 8px, #d95529 9px 12px, #ffae42 13px 15px, #3a2825 16px 21px); content: ""; }
+    .grill-grate { position: absolute; z-index: 3; right: 15%; bottom: 56px; left: 15%; display: none; height: 8px; border: 2px solid #515156; border-radius: 4px; background: repeating-linear-gradient(90deg, #c0bab0 0 3px, #4b4948 3px 8px); box-shadow: 0 2px 4px rgb(53 36 25 / 30%); }
+    .stove-scene.is-grilling .grill-grate { display: block; }
+    .grill-food { position: absolute; z-index: 4; right: 20%; bottom: 65px; left: 20%; display: none; justify-content: center; gap: 4px; font-size: 21px; }
+    .stove-scene.is-grilling .grill-food { display: flex; }
+    .grill-food span { display: inline-block; animation: food-drop 300ms ease both; }
+    .stove-scene.is-grilling .steam { bottom: 105px; }
+    .stove-scene.is-lit .cook-pan { box-shadow: 0 0 16px rgb(255 131 42 / 36%), 0 6px 8px rgb(64 38 27 / 27%), inset 0 -7px 0 rgb(255 255 255 / 13%); }
+    .stove-scene.is-stirring .cook-pan { animation: pan-stir 430ms ease; }
+    .stove-scene.is-flipping .cook-pan { animation: pan-flip 520ms cubic-bezier(.2, .75, .3, 1); }
+    .stove-scene.is-flipping.is-grilling .grill-food { animation: grill-flip 520ms cubic-bezier(.2, .75, .3, 1); }
+    .stove-scene.is-fanning .flames { transform: translateX(-50%) scale(1.18); }
+    .steam { position: absolute; z-index: 4; bottom: 97px; left: calc(50% - 30px); display: flex; gap: 17px; opacity: 0; }
+    .steam span { width: 7px; height: 18px; transform: translateY(8px); border-radius: 50%; background: rgb(255 255 255 / 76%); filter: blur(2px); }
+    .stove-scene.is-lit .steam { opacity: .8; }
+    .stove-scene.is-lit .steam span { animation: steam-rise 900ms ease-in-out infinite; }
+    .steam span:nth-child(2) { animation-delay: 270ms; }
+    .steam span:nth-child(3) { animation-delay: 510ms; }
+    .stove-knobs { position: absolute; z-index: 2; right: 16%; bottom: 5px; display: flex; gap: 13px; }
+    .stove-knobs span { width: 9px; height: 9px; border: 2px solid #ded5c7; border-radius: 50%; background: #37353b; }
+    .stove-label { position: absolute; z-index: 2; bottom: 4px; left: 16%; color: #fff0d3; font-size: 7px; font-weight: 900; letter-spacing: .12em; }
+    .cook-prompt { min-height: 27px; margin: 7px 0 5px; color: #73583f; font-size: 9px; font-weight: 800; line-height: 1.4; text-align: center; }
+    .cook-steps { display: flex; justify-content: center; gap: 7px; margin: 0 0 7px; padding: 0; list-style: none; }
+    .cook-step { display: grid; width: 22px; height: 22px; place-items: center; border: 1px solid #e4d7c6; border-radius: 50%; background: #fff; color: #9f8c79; font-size: 11px; }
+    .cook-step.is-done { border-color: #70a975; background: #e5f2df; color: #3a7d50; }
+    .cook-step.is-next { border-color: #d1843f; background: #fff0d4; color: #a5532c; box-shadow: 0 0 0 2px rgb(209 132 63 / 15%); }
+    .plate-area { display: flex; min-height: 67px; align-items: center; justify-content: center; gap: 10px; }
+    .serving-plate { display: grid; width: 66px; height: 44px; flex: 0 0 auto; place-items: center; overflow: hidden; border: 4px solid #d5d9de; border-radius: 50%; background: radial-gradient(ellipse, #fff 0 53%, #e8eaeb 56% 65%, #fff 68%); box-shadow: 0 3px 5px rgb(70 56 40 / 15%); font-size: 16px; }
+    .serving-plate.is-filled { border-color: #d8c49f; background: radial-gradient(ellipse, #fffaf0 0 53%, #d8c49f 56% 65%, #fff 68%); }
+    .serving-plate.is-ready { box-shadow: 0 0 0 3px rgb(106 157 89 / 18%), 0 3px 5px rgb(70 56 40 / 15%); }
+    .plate-food { display: flex; align-items: center; justify-content: center; gap: 1px; }
+    .plate-food span { display: inline-block; animation: food-drop 300ms ease both; }
+    .plate-prompt { margin: 0; color: #73583f; font-size: 9px; font-weight: 800; line-height: 1.4; }
+    .plate-button { min-height: 38px; border: 1px solid #dfcfb9; border-radius: 9px; background: #fffdf8; padding: 6px 9px; color: #604633; font-size: 9px; font-weight: 900; cursor: pointer; }
+    .plate-button:hover:not(:disabled) { border-color: #81a773; background: #f0f7e9; }
+    .plate-button:disabled { opacity: .48; cursor: not-allowed; }
+    .tool-row { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 5px; }
+    .tool-button, .ignite-button { display: inline-flex; min-height: 37px; align-items: center; justify-content: center; gap: 5px; border: 1px solid #dfcfb9; border-radius: 9px; background: #fffdf8; padding: 6px 7px; color: #604633; font-size: 9px; font-weight: 900; cursor: pointer; transition: background 140ms ease, border-color 140ms ease, transform 140ms ease; }
+    .tool-button[hidden] { display: none; }
+    .tool-button:hover:not(:disabled), .ignite-button:hover:not(:disabled) { transform: translateY(-1px); border-color: #c68e55; background: #fff3de; }
+    .tool-button:disabled, .ignite-button:disabled { opacity: .48; cursor: not-allowed; }
+    .tool-button.is-next { border-color: #c16b38; background: #fff0d4; box-shadow: inset 0 0 0 1px #c16b38; }
+    .ignite-button { width: 100%; margin-top: 7px; border-color: #bd6b40; background: #bd5535; color: #fff; }
+    .ignite-button:hover:not(:disabled) { border-color: #963e28; background: #963e28; }
+    .is-playing .chef-portrait { animation: chef-bob 1.6s ease-in-out infinite; }
+    .stove-stage.is-celebrating .cook-pan { animation: pan-cheer 440ms ease; }
+    @keyframes chef-bob { 50% { transform: translateY(-2px) rotate(2deg); } }
+    @keyframes flame-flicker { from { transform: scaleY(.78) rotate(-5deg); } to { transform: scaleY(1.12) rotate(5deg); } }
+    @keyframes pan-stir { 25% { transform: translateX(-54%) rotate(-7deg); } 55% { transform: translateX(-46%) rotate(7deg); } 80% { transform: translateX(-52%) rotate(-4deg); } }
+    @keyframes pan-flip { 35% { transform: translate(-50%, -28px) rotate(-17deg); } 65% { transform: translate(-50%, -24px) rotate(15deg); } }
+    @keyframes grill-flip { 35% { transform: translateY(-18px) rotate(-10deg); } 65% { transform: translateY(-13px) rotate(8deg); } }
+    @keyframes pan-cheer { 40% { transform: translate(-50%, -10px) rotate(6deg); } }
+    @keyframes steam-rise { 50% { transform: translateY(-8px) scaleX(1.4); opacity: .3; } }
+    @keyframes food-drop { from { transform: translateY(-18px) rotate(35deg); opacity: 0; } to { transform: translateY(0) rotate(0); opacity: 1; } }
     .ingredient-station { display: flex; flex-direction: column; }
     .ingredient-list { display: grid; flex: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
     .ingredient { display: flex; min-width: 0; min-height: 57px; align-items: center; gap: 8px; border: 1px solid #eadfce; border-radius: 10px; background: #fffdfa; padding: 8px; color: var(--ink); text-align: left; cursor: pointer; transition: transform 140ms ease, border-color 140ms ease, background 140ms ease; }
@@ -97,11 +179,6 @@
     .instructions strong { color: var(--ink); }
     .credit { margin: 22px 0 0; color: var(--muted); font-size: 9px; text-align: center; }
     .credit a { color: var(--leaf-dark); font-weight: 800; }
-    .is-playing .chef-portrait { animation: chef-bob 1.6s ease-in-out infinite; }
-    .chef-stage.is-celebrating .chef-portrait { animation: chef-pop 450ms ease; }
-    @keyframes chef-bob { 50% { transform: translateY(-4px) rotate(1deg); } }
-    @keyframes chef-pop { 45% { transform: scale(1.09) rotate(-5deg); } }
-
     @media (max-width: 780px) {
       .kitchen-board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
       .ingredient-station { grid-column: 1 / -1; }
@@ -117,7 +194,8 @@
       .intro { grid-template-columns: 1fr; gap: 14px; }
       .intro-copy > p:last-child { font-size: 12px; }
       .chef-portraits { padding-left: 4px; }
-      .chef-avatar { width: 58px; }
+      .chef-avatar { width: 76px; margin-left: -12px; }
+      .chef-portrait { width: 64px; height: 64px; }
       .page-content { padding-top: 27px; }
       .scorebar { align-items: stretch; flex-direction: column; padding: 12px; }
       .score-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
@@ -129,15 +207,18 @@
       .order-ticket { min-height: 0; }
       .recipe-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
       .recipe-step { align-items: flex-start; font-size: 9px; }
-      .chef-stage { min-height: 190px; }
-      .chef-portrait { width: 122px; }
-      .ingredient-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+      .stove-stage { min-height: 300px; }
+      .stove-scene { min-height: 160px; }
+      .cook-prompt { font-size: 10px; }
+      .tool-button, .ignite-button { min-height: 40px; font-size: 10px; }
+      .ingredient-list { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
       .ingredient { min-height: 64px; padding: 5px 3px; }
       .ingredient-icon { width: 27px; height: 27px; font-size: 16px; }
       .ingredient-label { font-size: 9px; }
     }
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+      .stove-scene.is-lit .flame, .stove-scene.is-lit .steam span, .is-playing .chef-portrait { animation: none; }
     }
   </style>
 </head>
@@ -148,7 +229,8 @@
       <nav class="game-links" aria-label="Jogos">
         <a href="index.html">Início</a>
         <a href="quiz.html">Planetas</a>
-        <a href="cozinha.html" aria-current="page">Miau Chef</a>
+        <a href="cozinha3d.html">Miau Chef 3D</a>
+        <a href="cozinha.html" aria-current="page">Miau Chef clássico</a>
       </nav>
     </header>
 
@@ -157,21 +239,23 @@
         <div class="intro-copy">
           <p class="eyebrow">MIAU CHEF · CORRERIA NO FOGÃO</p>
           <h1 id="page-title">Bigodes a postos. O pedido não espera!</h1>
-          <p>Monte pratos brasileiros com a equipe mais peluda do bairro. Acerte os ingredientes, sirva rapidinho e tente não deixar cair a farofa.</p>
+          <p>Leve cada ingrediente para a estação certa, acenda o fogão ou a churrasqueira e prepare pratos brasileiros. A equipe mais peluda do bairro está esperando!</p>
         </div>
         <div class="chef-portraits" aria-label="Conheça os gatos cozinheiros">
-          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-luna.jpg" alt="Luna, gata ruiva cozinheira"></div>
-          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-bento.jpg" alt="Bento, gato de avental invisível"></div>
-          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-tita.jpg" alt="Tita, gata de óculos escuros"></div>
+          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-luna.svg" alt="Luna, gata ruiva usando uniforme branco e chapéu de chef"></div>
+          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-bento.svg" alt="Bento, gato preto e branco usando uniforme branco e chapéu de chef"></div>
+          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-tita.svg" alt="Tita, gata cinza usando uniforme branco e chapéu de chef"></div>
         </div>
       </section>
 
       <section class="game-panel" id="kitchen-game" aria-label="Jogo Miau Chef">
         <div class="scorebar">
           <div class="score-group" aria-label="Placar">
-            <div class="score-chip score-chip--time"><span>Tempo</span><strong id="timer">01:00</strong></div>
+            <div class="score-chip score-chip--time"><span>Turno</span><strong id="timer">05:00</strong></div>
+            <div class="score-chip"><span>Comanda</span><strong id="order-timer">00:00</strong></div>
             <div class="score-chip"><span>Pratos servidos</span><strong id="served">0</strong></div>
             <div class="score-chip"><span>Combo de miau</span><strong id="combo">x0</strong></div>
+            <div class="score-chip"><span>Pontos</span><strong id="score">0</strong></div>
           </div>
           <button class="start-button" id="start-button" type="button"><span aria-hidden="true">🍳</span> Abrir a cozinha</button>
         </div>
@@ -189,15 +273,49 @@
                 <li class="recipe-step"><span class="step-check" aria-hidden="true">✓</span><span>???</span></li>
               </ol>
               <div class="ticket-footer">Mesa 3 · cliente com fome e pressa</div>
+              <div class="customer-voice">
+                <span class="customer-avatar" id="customer-avatar" aria-hidden="true">🧔🏽</span>
+                <div>
+                  <span class="customer-name" id="customer-name">Cliente da vez</span>
+                  <p class="customer-speech" id="customer-speech" role="status" aria-live="polite">“Pode caprichar. Estou com fome desde o café da manhã!”</p>
+                </div>
+              </div>
             </div>
           </section>
 
-          <section class="station" aria-labelledby="chef-heading">
-            <h2 class="station-heading" id="chef-heading"><span>🐾 Chef de plantão</span><span>100% bigodes</span></h2>
-            <div class="chef-stage" id="chef-stage">
-              <p class="speech" id="speech" role="status" aria-live="polite">“Hoje eu só derrubei uma panela. Até agora.”</p>
-              <div class="chef-portrait"><img id="chef-image" src="assets/cozinha/gato-chef-luna.jpg" alt="Luna, gata cozinheira"></div>
-              <p class="chef-name" id="chef-name">Luna · chefe dos miados</p>
+          <section class="station" aria-labelledby="stove-heading">
+            <h2 class="station-heading" id="stove-heading"><span>🔥 Fogão do chef</span><span id="stove-label">apagado</span></h2>
+            <div class="stove-stage" id="stove-stage">
+              <div class="chef-tip">
+                <div class="chef-portrait"><img id="chef-image" src="assets/cozinha/gato-chef-luna.svg" alt="Luna, gata ruiva usando uniforme branco e chapéu de chef"></div>
+                <p class="speech" id="speech" role="status" aria-live="polite">“Hoje eu só derrubei uma panela. Até agora.”</p>
+              </div>
+              <div class="stove-scene" id="stove-scene" role="img" aria-label="Fogão apagado com uma panela vazia">
+                <div class="stove-surface" aria-hidden="true"></div>
+                <div class="burner" aria-hidden="true"></div>
+                <div class="flames" aria-hidden="true"><span class="flame"></span><span class="flame"></span><span class="flame"></span></div>
+                <div class="cook-pan" aria-hidden="true"><div class="pan-food" id="pan-food"></div></div>
+                <div class="grill-firebox" aria-hidden="true"></div>
+                <div class="grill-grate" aria-hidden="true"></div>
+                <div class="grill-food" id="grill-food" aria-hidden="true"></div>
+                <div class="steam" aria-hidden="true"><span></span><span></span><span></span></div>
+                <div class="stove-knobs" aria-hidden="true"><span></span><span></span><span></span></div>
+                <span class="stove-label" aria-hidden="true">FOGÃO MIAU CHEF</span>
+              </div>
+              <p class="cook-prompt" id="cook-prompt" role="status" aria-live="polite">Escolha os ingredientes da comanda para encher a panela.</p>
+              <ol class="cook-steps" id="cook-steps" aria-label="Etapas do cozimento">
+              </ol>
+              <div class="tool-row" aria-label="Utensílios de cozinha">
+                <button class="tool-button" id="spoon-button" type="button" data-tool="stir" disabled title="Mexer com a colher">🥄 Mexer</button>
+                <button class="tool-button" id="spatula-button" type="button" data-tool="flip" disabled title="Virar com a espátula">🍳 Virar</button>
+                <button class="tool-button" id="fan-button" type="button" data-tool="fan" disabled title="Abanar a brasa">🌬️ Abanar</button>
+              </div>
+              <button class="ignite-button" id="ignite-button" type="button" disabled><span id="ignite-icon" aria-hidden="true">🔥</span><span id="ignite-label">Acender o fogão</span></button>
+              <div class="plate-area">
+                <div class="serving-plate" id="serving-plate" role="img" aria-label="Prato vazio"><span class="plate-food" id="plate-food"></span></div>
+                <p class="plate-prompt" id="plate-prompt">Prato esperando o pedido.</p>
+                <button class="plate-button" id="plate-button" type="button" disabled>🍽️ Montar prato</button>
+              </div>
             </div>
           </section>
 
@@ -210,17 +328,19 @@
               <button class="ingredient" type="button" data-ingredient="feijao" disabled><span class="ingredient-icon" aria-hidden="true">🫘</span><span class="ingredient-label">Feijão</span></button>
               <button class="ingredient" type="button" data-ingredient="carnes" disabled><span class="ingredient-icon" aria-hidden="true">🥩</span><span class="ingredient-label">Carnes</span></button>
               <button class="ingredient" type="button" data-ingredient="laranja" disabled><span class="ingredient-icon" aria-hidden="true">🍊</span><span class="ingredient-label">Laranja</span></button>
-              <button class="ingredient" type="button" data-ingredient="brasa" disabled><span class="ingredient-icon" aria-hidden="true">🔥</span><span class="ingredient-label">Brasa</span></button>
+              <button class="ingredient" type="button" data-ingredient="bacon" disabled><span class="ingredient-icon" aria-hidden="true">🥓</span><span class="ingredient-label">Bacon</span></button>
+              <button class="ingredient" type="button" data-ingredient="coentro" disabled><span class="ingredient-icon" aria-hidden="true">🌿</span><span class="ingredient-label">Coentro</span></button>
+              <button class="ingredient" type="button" data-ingredient="sal" disabled><span class="ingredient-icon" aria-hidden="true">🧂</span><span class="ingredient-label">Sal grosso</span></button>
               <button class="ingredient" type="button" data-ingredient="farofa" disabled><span class="ingredient-icon" aria-hidden="true">🥣</span><span class="ingredient-label">Farofa</span></button>
             </div>
             <button class="serve-button" id="serve-button" type="button" disabled><span aria-hidden="true">🍽️</span> Servir pedido</button>
           </section>
         </div>
-        <p class="game-status" id="game-status" role="status" aria-live="polite">Clique em “Abrir a cozinha” para começar o turno de 60 segundos.</p>
+        <p class="game-status" id="game-status" role="status" aria-live="polite">Clique em “Abrir a cozinha” para começar o turno de 5 minutos.</p>
       </section>
 
-      <p class="instructions"><strong>Como jogar:</strong> clique nos ingredientes da comanda na ordem indicada e sirva o prato. Ingrediente errado custa 2 segundos. Cada trio de comandas traz os três pratos do cardápio!</p>
-      <p class="credit">Fotografias dos gatinhos: <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>.</p>
+      <p class="instructions"><strong>Como jogar:</strong> você tem 5 minutos para atender o máximo de clientes. O tempo da comanda reinicia a cada prato; rapidez e erros de preparo influenciam as estrelas e os pontos dados pelo cliente. Prepare estrogonofe e feijoada na panela e asse o churrasco na churrasqueira. Monte cada prato e finalize a feijoada com laranja. Erros também custam 2 segundos do turno.</p>
+      <p class="credit">Ilustrações originais dos gatinhos criadas para o Miau Chef.</p>
     </main>
   </div>
 
@@ -232,51 +352,114 @@
         icon: "🍲",
         note: "Cremoso, clássico e sem patinhas na panela.",
         ingredients: ["frango", "creme", "molho"],
-        chef: { name: "Luna · chefe dos miados", image: "assets/cozinha/gato-chef-luna.jpg", alt: "Luna, gata ruiva cozinheira" }
+        station: "stove",
+        actions: ["stir", "flip", "stir"],
+        chef: { name: "Luna · chefe dos miados", image: "assets/cozinha/gato-chef-luna.svg", alt: "Luna, gata ruiva usando uniforme branco e chapéu de chef" }
       },
       {
         id: "feijoada",
         title: "Feijoada",
         icon: "🫘",
-        note: "Capricha no feijão e não esquece a laranja!",
-        ingredients: ["feijao", "carnes", "laranja"],
-        chef: { name: "Bento · fiscal da soneca", image: "assets/cozinha/gato-chef-bento.jpg", alt: "Bento, gato preto e branco" }
+        note: "Feijão, carnes, bacon e coentro. A laranja vai no prato!",
+        ingredients: ["feijao", "carnes", "bacon", "coentro"],
+        station: "stove",
+        actions: ["stir", "flip", "stir"],
+        garnish: "laranja",
+        chef: { name: "Bento · fiscal da soneca", image: "assets/cozinha/gato-chef-bento.svg", alt: "Bento, gato preto e branco usando uniforme branco e chapéu de chef" }
       },
       {
         id: "churrasco",
         title: "Churrasco",
         icon: "🥩",
-        note: "Acende a brasa. O gato já está de olho na picanha.",
-        ingredients: ["carnes", "brasa", "farofa"],
-        chef: { name: "Tita · mestre da grelha", image: "assets/cozinha/gato-chef-tita.jpg", alt: "Tita, gata cinza de óculos escuros" }
+        note: "Carne na brasa, sal grosso e farofa. Tita cuida do fogo!",
+        ingredients: ["carnes", "sal", "farofa"],
+        station: "grill",
+        actions: ["fan", "flip", "flip", "fan"],
+        chef: { name: "Tita · mestre da grelha", image: "assets/cozinha/gato-chef-tita.svg", alt: "Tita, gata cinza usando uniforme branco, chapéu de chef e óculos escuros" }
+      }
+    ];
+
+    const customers = [
+      {
+        name: "Seu Zeca, fiscal da fome",
+        avatar: "🧔🏽",
+        waiting: ["“Minha barriga já pediu a conta duas vezes!”", "“Se demorar, vou pedir delivery pro meu gato.”"],
+        happy: ["“Esse prato merece aplauso... e repeteco!”", "“Meu estômago aplaudiu em pé. E ele nem tem pernas!”"]
+      },
+      {
+        name: "Dona Fifi, crítica culinária",
+        avatar: "👵🏻",
+        waiting: ["“Meu relógio anda mais rápido quando tem fome?”", "“A novela acabou e a comida ainda não chegou!”"],
+        happy: ["“Uma delícia! Vou contar até para o grupo da família.”", "“Nota dez. E olha que eu trouxe minha lupa crítica!”"]
+      },
+      {
+        name: "Nino, cliente mirim",
+        avatar: "🧒🏽",
+        waiting: ["“Moço, meu feijão tá criando barba?”", "“Eu já cresci um centímetro esperando!”"],
+        happy: ["“Oba! Mais gostoso que roubar petisco do meu cachorro!”", "“Gostei tanto que até dividi. Quase!”"]
       }
     ];
 
     const timerDisplay = document.querySelector("#timer");
+    const orderTimerDisplay = document.querySelector("#order-timer");
     const servedDisplay = document.querySelector("#served");
     const comboDisplay = document.querySelector("#combo");
+    const scoreDisplay = document.querySelector("#score");
     const startButton = document.querySelector("#start-button");
     const serveButton = document.querySelector("#serve-button");
     const ingredientButtons = Array.from(document.querySelectorAll(".ingredient"));
+    const toolButtons = Array.from(document.querySelectorAll(".tool-button"));
+    const spoonButton = document.querySelector("#spoon-button");
+    const spatulaButton = document.querySelector("#spatula-button");
+    const fanButton = document.querySelector("#fan-button");
+    const igniteButton = document.querySelector("#ignite-button");
+    const plateButton = document.querySelector("#plate-button");
     const dishTitle = document.querySelector("#dish-title");
     const dishNote = document.querySelector("#dish-note");
     const orderNumber = document.querySelector("#order-number");
     const recipeSteps = document.querySelector("#recipe-steps");
-    const chefStage = document.querySelector("#chef-stage");
+    const stoveStage = document.querySelector("#stove-stage");
+    const stoveScene = document.querySelector("#stove-scene");
+    const stoveLabel = document.querySelector("#stove-label");
+    const igniteIcon = document.querySelector("#ignite-icon");
+    const igniteLabel = document.querySelector("#ignite-label");
+    const cookPrompt = document.querySelector("#cook-prompt");
+    const cookSteps = document.querySelector("#cook-steps");
+    const panFood = document.querySelector("#pan-food");
+    const grillFood = document.querySelector("#grill-food");
+    const plateFood = document.querySelector("#plate-food");
+    const servingPlate = document.querySelector("#serving-plate");
+    const platePrompt = document.querySelector("#plate-prompt");
     const chefImage = document.querySelector("#chef-image");
-    const chefName = document.querySelector("#chef-name");
     const speech = document.querySelector("#speech");
     const gameStatus = document.querySelector("#game-status");
+    const customerAvatar = document.querySelector("#customer-avatar");
+    const customerName = document.querySelector("#customer-name");
+    const customerSpeech = document.querySelector("#customer-speech");
+    const stoveHeadingLabel = document.querySelector("#stove-heading span:first-child");
 
-    let remainingSeconds = 60;
+    let remainingSeconds = 300;
     let served = 0;
     let combo = 0;
+    let score = 0;
+    let totalStars = 0;
+    let orderMistakes = 0;
     let orderCount = 0;
     let currentRecipe = null;
     let nextIngredient = 0;
+    let nextCookingAction = 0;
+    let selectedIngredients = [];
     let recipeQueue = [];
+    let orderElapsed = 0;
+    let customerTimeout = null;
+    let customerIndex = 0;
+    let currentCustomer = customers[0];
     let timerInterval = null;
     let isPlaying = false;
+    let stoveOn = false;
+    let isCooked = false;
+    let isPlated = false;
+    let hasGarnish = false;
 
     function formatTime(seconds) {
       const minutes = Math.floor(seconds / 60);
@@ -303,6 +486,15 @@
       if (recipeQueue.length === 0) recipeQueue = shuffle(recipes);
       currentRecipe = recipeQueue.pop();
       nextIngredient = 0;
+      nextCookingAction = 0;
+      selectedIngredients = [];
+      stoveOn = false;
+      isCooked = false;
+      isPlated = false;
+      hasGarnish = false;
+      orderElapsed = 0;
+      orderMistakes = 0;
+      orderTimerDisplay.textContent = formatTime(orderElapsed);
       renderRecipe();
     }
 
@@ -310,6 +502,30 @@
       dishTitle.textContent = `${currentRecipe.icon} ${currentRecipe.title}`;
       dishNote.textContent = currentRecipe.note;
       orderNumber.textContent = `#${String(orderCount + 1).padStart(2, "0")}`;
+      chefImage.src = currentRecipe.chef.image;
+      chefImage.alt = currentRecipe.chef.alt;
+      panFood.replaceChildren();
+      grillFood.replaceChildren();
+      plateFood.replaceChildren();
+      servingPlate.classList.remove("is-filled", "is-ready");
+      servingPlate.setAttribute("aria-label", "Prato vazio");
+      platePrompt.textContent = "Prato esperando o pedido.";
+      stoveScene.classList.toggle("is-grilling", currentRecipe.station === "grill");
+      stoveScene.classList.remove("is-stirring", "is-flipping", "is-fanning");
+      stoveHeadingLabel.textContent = currentRecipe.station === "grill" ? "🔥 Churrasqueira do chef" : "🔥 Fogão do chef";
+      stoveLabel.textContent = currentRecipe.station === "grill" ? "brasa apagada" : "apagado";
+      spoonButton.hidden = !currentRecipe.actions.includes("stir");
+      fanButton.hidden = !currentRecipe.actions.includes("fan");
+      spatulaButton.title = currentRecipe.station === "grill" ? "Virar com o pegador" : "Virar com a espátula";
+      spatulaButton.setAttribute("aria-label", spatulaButton.title);
+      stoveStage.classList.remove("is-celebrating");
+      renderRecipeSteps();
+      renderCookSteps();
+      updateStoveControls();
+      serveButton.disabled = true;
+    }
+
+    function renderRecipeSteps() {
       recipeSteps.replaceChildren(...currentRecipe.ingredients.map((ingredientId, index) => {
         const button = ingredientButtons.find((item) => item.dataset.ingredient === ingredientId);
         const step = document.createElement("li");
@@ -324,73 +540,200 @@
         step.append(check, label);
         return step;
       }));
-      chefImage.src = currentRecipe.chef.image;
-      chefImage.alt = currentRecipe.chef.alt;
-      chefName.textContent = currentRecipe.chef.name;
-      serveButton.disabled = true;
     }
 
-    function setIngredientsEnabled(enabled) {
-      for (const button of ingredientButtons) button.disabled = !enabled;
+    function renderCookSteps() {
+      if (!currentRecipe) return;
+      const actions = currentRecipe.actions;
+      const actionNames = { stir: "mexer com a colher", flip: currentRecipe.station === "grill" ? "virar com o pegador" : "virar com a espátula", fan: "abanar a brasa" };
+      const actionIcons = { stir: "🥄", flip: "🍳", fan: "🌬️" };
+      cookSteps.replaceChildren(...actions.map((action, index) => {
+        const step = document.createElement("li");
+        step.className = "cook-step";
+        step.textContent = actionIcons[action];
+        step.setAttribute("aria-label", `Etapa ${index + 1}: ${index < nextCookingAction ? "concluída" : actionNames[action]}`);
+        step.classList.toggle("is-done", index < nextCookingAction);
+        step.classList.toggle("is-next", stoveOn && index === nextCookingAction);
+        return step;
+      }));
+      toolButtons.forEach((button) => {
+        button.disabled = !isPlaying || !stoveOn || !actions.includes(button.dataset.tool);
+        button.classList.toggle("is-next", stoveOn && button.dataset.tool === actions[nextCookingAction]);
+      });
+    }
+
+    function updateStoveControls() {
+      const ingredientsComplete = currentRecipe && nextIngredient === currentRecipe.ingredients.length;
+      const canAddIngredients = isPlaying && currentRecipe && !ingredientsComplete && !stoveOn && !isCooked && !isPlated;
+      for (const button of ingredientButtons) {
+        const isGarnish = currentRecipe && currentRecipe.garnish === button.dataset.ingredient;
+        const canAddGarnish = isPlaying && isPlated && isGarnish && !hasGarnish;
+        button.disabled = !(canAddGarnish || (canAddIngredients && currentRecipe.ingredients.includes(button.dataset.ingredient)));
+      }
+      igniteButton.disabled = !isPlaying || !ingredientsComplete || stoveOn || isCooked;
+      igniteIcon.textContent = isCooked ? "✅" : "🔥";
+      igniteLabel.textContent = stoveOn ? "No fogo!" : isCooked ? "Prato no ponto!" : currentRecipe && currentRecipe.station === "grill" ? "Acender a churrasqueira" : "Acender o fogão";
+      plateButton.disabled = !isPlaying || !isCooked || isPlated;
+      serveButton.disabled = !isPlaying || !isPlated || Boolean(currentRecipe && currentRecipe.garnish && !hasGarnish);
+      stoveScene.classList.toggle("is-lit", stoveOn);
+      stoveLabel.textContent = currentRecipe && currentRecipe.station === "grill"
+        ? stoveOn ? "brasa acesa!" : "brasa apagada"
+        : stoveOn ? "aceso!" : "apagado";
+      stoveScene.setAttribute(
+        "aria-label",
+        currentRecipe && currentRecipe.station === "grill"
+          ? stoveOn ? "Churrasqueira acesa com carnes na grelha" : `Churrasqueira apagada com ${selectedIngredients.length} ingredientes na grelha`
+          : stoveOn ? "Fogão aceso, panela cozinhando" : `Fogão apagado com ${selectedIngredients.length} ingredientes na panela`
+      );
+      renderCookSteps();
+    }
+
+    function addIngredientToPan(ingredientId) {
+      const button = ingredientButtons.find((item) => item.dataset.ingredient === ingredientId);
+      const food = document.createElement("span");
+      food.textContent = button.querySelector(".ingredient-icon").textContent;
+      food.setAttribute("aria-hidden", "true");
+      (currentRecipe.station === "grill" ? grillFood : panFood).append(food);
+      stoveScene.classList.remove("is-stirring", "is-flipping", "is-fanning");
+      void stoveScene.offsetWidth;
+      stoveScene.classList.add(currentRecipe.station === "grill" ? "is-flipping" : "is-stirring");
+      window.setTimeout(() => stoveScene.classList.remove("is-stirring", "is-flipping"), 350);
+    }
+
+    function announceCustomer(isArrival = true) {
+      currentCustomer = customers[customerIndex % customers.length];
+      customerAvatar.textContent = currentCustomer.avatar;
+      customerName.textContent = currentCustomer.name;
+      customerSpeech.textContent = isArrival
+        ? "“Cheguei! Meu apetite chegou uns cinco minutos antes.”"
+        : "“Pode caprichar. Estou com fome desde o café da manhã!”";
+    }
+
+    function addToPlate(ingredientId) {
+      const button = ingredientButtons.find((item) => item.dataset.ingredient === ingredientId);
+      const food = document.createElement("span");
+      food.textContent = button.querySelector(".ingredient-icon").textContent;
+      food.setAttribute("aria-hidden", "true");
+      plateFood.append(food);
+      servingPlate.classList.add("is-filled");
+    }
+
+    function plateOrder() {
+      if (!isPlaying || !isCooked || isPlated) return;
+      isPlated = true;
+      for (const ingredientId of selectedIngredients) addToPlate(ingredientId);
+      servingPlate.setAttribute("aria-label", `Prato de ${currentRecipe.title} montado`);
+      plateButton.disabled = true;
+      if (currentRecipe.garnish) {
+        platePrompt.textContent = "Agora finalize com a laranja.";
+        cookPrompt.textContent = "Feijoada no prato! A laranja entra só agora, por cima.";
+        setStatus("Feijoada no prato! A laranja vai por último, para acompanhar.", "success");
+        speech.textContent = "“Sem laranja na panela, chef! Ela vai no prato.”";
+      } else {
+        servingPlate.classList.add("is-ready");
+        platePrompt.textContent = "Bonito e pronto para servir!";
+        cookPrompt.textContent = "Prato montado! Sirva para o cliente.";
+        setStatus("Prato montado! Leve para a mesa antes que esfrie.", "success");
+        speech.textContent = "“Olha essa apresentação! Até eu fiquei com água no bigode.”";
+      }
+      updateStoveControls();
+    }
+
+    function loseTime(message, catLine) {
+      remainingSeconds = Math.max(0, remainingSeconds - 2);
+      orderMistakes += 1;
+      timerDisplay.textContent = formatTime(remainingSeconds);
+      combo = 0;
+      comboDisplay.textContent = "x0";
+      setStatus(message, "error");
+      speech.textContent = catLine;
+      if (remainingSeconds === 0) finishGame();
     }
 
     function startGame() {
       window.clearInterval(timerInterval);
-      remainingSeconds = 60;
+      window.clearTimeout(customerTimeout);
+      remainingSeconds = 300;
       served = 0;
       combo = 0;
+      score = 0;
+      totalStars = 0;
       orderCount = 0;
       recipeQueue = [];
       isPlaying = true;
       timerDisplay.textContent = formatTime(remainingSeconds);
       servedDisplay.textContent = "0";
       comboDisplay.textContent = "x0";
+      scoreDisplay.textContent = "0";
+      orderTimerDisplay.textContent = "00:00";
       startButton.innerHTML = '<span aria-hidden="true">↻</span> Recomeçar';
-      setIngredientsEnabled(true);
       pickNextRecipe();
-      setStatus("Começou! Monte a comanda antes que o chef faça uma soneca.", "success");
+      customerIndex = 0;
+      announceCustomer(false);
+      setStatus("Começou o turno de 5 minutos! Cada cliente vai avaliar rapidez e preparo.", "success");
       speech.textContent = "“Três pratos seguidos e eu ganho um sachê?”";
-      chefStage.classList.add("is-playing");
+      stoveStage.classList.add("is-playing");
       timerInterval = window.setInterval(() => {
         remainingSeconds -= 1;
+        orderElapsed += 1;
         timerDisplay.textContent = formatTime(remainingSeconds);
+        orderTimerDisplay.textContent = formatTime(orderElapsed);
+        if (orderElapsed === 12) customerSpeech.textContent = currentCustomer.waiting[0];
+        if (orderElapsed === 24) customerSpeech.textContent = currentCustomer.waiting[1];
         if (remainingSeconds <= 0) finishGame();
       }, 1000);
     }
 
     function finishGame() {
       window.clearInterval(timerInterval);
+      window.clearTimeout(customerTimeout);
       isPlaying = false;
-      setIngredientsEnabled(false);
-      serveButton.disabled = true;
-      chefStage.classList.remove("is-playing");
+      stoveOn = false;
+      stoveStage.classList.remove("is-playing");
+      updateStoveControls();
       startButton.innerHTML = '<span aria-hidden="true">🐾</span> Jogar outra vez';
+      const averageStars = served ? (totalStars / served).toFixed(1) : "0.0";
       const result = served === 0
-        ? "O turno acabou! A equipe felina pede revanche (e um lanchinho)."
-        : `Fim do turno! Você serviu ${served} ${served === 1 ? "prato" : "pratos"} e fez combo máximo de x${combo}.`;
+        ? "O turno acabou! A equipe felina pede revanche (e um lanchinho). Pontuação: 0."
+        : `Fim do turno! ${served} ${served === 1 ? "prato" : "pratos"}, ${score} pontos e avaliação média de ${averageStars}/5 estrelas.`;
       setStatus(result, served ? "success" : "");
       speech.textContent = served ? "“Miau! Serviço encerrado. Cadê meu pagamento em petiscos?”" : "“Eu pisquei e o turno acabou. De novo?”";
+      cookPrompt.textContent = "Turno encerrado. Aperte “Jogar outra vez” para abrir a cozinha.";
     }
 
     function chooseIngredient(ingredientId) {
-      if (!isPlaying || !currentRecipe) return;
+      if (!isPlaying || !currentRecipe || stoveOn) return;
+      if (currentRecipe.garnish === ingredientId && isPlated && !hasGarnish) {
+        hasGarnish = true;
+        addToPlate(ingredientId);
+        servingPlate.classList.add("is-ready");
+        servingPlate.setAttribute("aria-label", "Feijoada montada com laranja para acompanhar");
+        platePrompt.textContent = "Laranja no prato. Agora pode servir!";
+        cookPrompt.textContent = "Finalização perfeita! A laranja ficou no prato, como manda a comanda.";
+        setStatus("Laranja no prato, nunca na panela! Feijoada pronta para servir.", "success");
+        speech.textContent = "“Aí sim! Laranja no prato e ninguém vai ser preso pela vó.”";
+        updateStoveControls();
+        return;
+      }
+      if (isCooked || isPlated || nextIngredient >= currentRecipe.ingredients.length) return;
       if (ingredientId !== currentRecipe.ingredients[nextIngredient]) {
-        remainingSeconds = Math.max(0, remainingSeconds - 2);
-        timerDisplay.textContent = formatTime(remainingSeconds);
-        combo = 0;
-        comboDisplay.textContent = "x0";
-        setStatus("Ops, esse ingrediente não vai nessa receita! Você perdeu 2 segundos.", "error");
-        speech.textContent = "“Esse não era o combinado... agora a panela está confusa.”";
-        if (remainingSeconds === 0) finishGame();
+        loseTime("Ops, esse ingrediente não vai nessa receita! Você perdeu 2 segundos.", "“Essa patinha pegou o ingrediente errado!”");
         return;
       }
 
       nextIngredient += 1;
-      renderRecipe();
+      selectedIngredients.push(ingredientId);
+      addIngredientToPan(ingredientId);
+      renderRecipeSteps();
+      updateStoveControls();
       if (nextIngredient === currentRecipe.ingredients.length) {
-        serveButton.disabled = false;
-        setStatus("Pratinho pronto! Clique em “Servir pedido” antes do próximo miado.", "success");
-        speech.textContent = "“Cheirinho bom! Pode mandar para a mesa!”";
+        cookPrompt.textContent = currentRecipe.station === "grill"
+          ? "Ingredientes na grelha! Acenda a churrasqueira para começar."
+          : "Ingredientes na panela! Acenda o fogão para começar o cozimento.";
+        setStatus(currentRecipe.station === "grill" ? "Grelha carregada! Acenda a churrasqueira." : "Tudo na panela! Agora acenda o fogão.", "success");
+        speech.textContent = currentRecipe.station === "grill"
+          ? "“Carne na grelha! Abana essa brasa, mestre!”"
+          : "“Panela carregada! Acende o fogo, chef!”";
       } else {
         const remaining = currentRecipe.ingredients.length - nextIngredient;
         setStatus(`Boa! Faltam ${remaining} ${remaining === 1 ? "ingrediente" : "ingredientes"} para fechar o prato.`, "success");
@@ -398,27 +741,97 @@
       }
     }
 
+    function igniteStove() {
+      if (!isPlaying || !currentRecipe || nextIngredient !== currentRecipe.ingredients.length || stoveOn || isCooked) return;
+      stoveOn = true;
+      stoveStage.classList.add("is-playing");
+      updateStoveControls();
+      const firstAction = currentRecipe.actions[0];
+      const actionLabel = firstAction === "fan" ? "abanar a brasa" : firstAction === "flip"
+        ? currentRecipe.station === "grill" ? "virar com o pegador" : "virar com a espátula"
+        : "mexer com a colher";
+      cookPrompt.textContent = `${currentRecipe.station === "grill" ? "Brasa acesa" : "Fogo aceso"}! Primeiro, ${actionLabel}.`;
+      setStatus(`${currentRecipe.station === "grill" ? "Churrasqueira" : "Fogão"} aceso! Siga os utensílios indicados.`, "success");
+      speech.textContent = currentRecipe.station === "grill"
+        ? "“Brasa acesa! Abana sem transformar a cozinha num show de fumaça.”"
+        : "“Fogo no ponto! Mexe com vontade, mas sem voar o jantar.”";
+    }
+
+    function useTool(tool) {
+      if (!isPlaying || !stoveOn || !currentRecipe) return;
+      if (tool !== currentRecipe.actions[nextCookingAction]) {
+        loseTime("Opa, agora é hora do outro utensílio! Você perdeu 2 segundos.", "“Leia a comanda, chef! Essa não é a ferramenta da vez.”");
+        return;
+      }
+
+      nextCookingAction += 1;
+      stoveScene.classList.remove("is-stirring", "is-flipping", "is-fanning");
+      void stoveScene.offsetWidth;
+      stoveScene.classList.add(tool === "stir" ? "is-stirring" : tool === "fan" ? "is-fanning" : "is-flipping");
+      if (tool === "fan") window.setTimeout(() => stoveScene.classList.remove("is-fanning"), 350);
+      renderCookSteps();
+
+      if (nextCookingAction === currentRecipe.actions.length) {
+        stoveOn = false;
+        isCooked = true;
+        stoveScene.classList.remove("is-lit");
+        updateStoveControls();
+        cookPrompt.textContent = "No ponto! Monte o prato para servir.";
+        platePrompt.textContent = "A receita ficou pronta. Falta montar o prato.";
+        setStatus("Perfeito! Ficou no ponto. Monte o prato para servir.", "success");
+        speech.textContent = "“Miau! Douradinho no ponto. Agora capricha no prato!”";
+        return;
+      }
+
+      const nextAction = currentRecipe.actions[nextCookingAction];
+      const nextTool = nextAction === "stir" ? "colher" : nextAction === "fan" ? "abanador" : currentRecipe.station === "grill" ? "pegador" : "espátula";
+      cookPrompt.textContent = nextAction === "fan" ? "Boa! Agora abane a brasa." : `Boa! Agora use a ${nextTool}.`;
+      setStatus(nextCookingAction === currentRecipe.actions.length - 1 ? "Última etapa e o prato sai!" : "Cozimento no ritmo! Continue seguindo a sequência.", "success");
+      speech.textContent = tool === "flip"
+        ? "“Essa viradinha foi digna de chef de TV!”"
+        : tool === "fan"
+          ? "“Isso! Brasa viva e bigodes sem fumaça!”"
+          : "“Mexeu direitinho! A cozinha toda está cheirando bem.”";
+    }
+
     function serveOrder() {
-      if (!isPlaying || !currentRecipe || nextIngredient !== currentRecipe.ingredients.length) return;
+      if (!isPlaying || !currentRecipe || !isPlated || (currentRecipe.garnish && !hasGarnish)) return;
+      window.clearTimeout(customerTimeout);
+      const happyLine = currentCustomer.happy[served % currentCustomer.happy.length];
+      const speedStars = orderElapsed <= 20 ? 5 : orderElapsed <= 35 ? 4 : orderElapsed <= 50 ? 3 : orderElapsed <= 75 ? 2 : 1;
+      const stars = Math.max(1, speedStars - Math.min(orderMistakes, 4));
+      const orderPoints = stars * 20;
+      totalStars += stars;
+      score += orderPoints;
+      customerSpeech.textContent = `${happyLine} Avaliação: ${"⭐".repeat(stars)} · ${orderPoints} pontos (${orderElapsed}s).`;
       served += 1;
       combo += 1;
       orderCount += 1;
       servedDisplay.textContent = String(served);
       comboDisplay.textContent = `x${combo}`;
-      chefStage.classList.remove("is-celebrating");
-      void chefStage.offsetWidth;
-      chefStage.classList.add("is-celebrating");
-      const cheers = ["Pedido entregue! Nem uma migalha no bigode.", "Mais um cliente feliz e um gato orgulhoso!", "Miau-perfeito! Próxima comanda chegando!"];
+      scoreDisplay.textContent = String(score);
+      stoveStage.classList.remove("is-celebrating");
+      void stoveStage.offsetWidth;
+      stoveStage.classList.add("is-celebrating");
+      const cheers = [`Cliente avaliou ${stars}/5 estrelas e deu ${orderPoints} pontos!`, "Mais um cliente feliz e um gato orgulhoso!", "Miau-perfeito! Próxima comanda chegando!"];
       setStatus(cheers[(served - 1) % cheers.length], "success");
       speech.textContent = combo >= 3 ? `“Combo x${combo}! Eu sou um gênio peludo!”` : "“Pedido entregue! Gorjeta em atum, por favor.”";
       pickNextRecipe();
+      customerIndex = served % customers.length;
+      currentCustomer = customers[customerIndex];
+      customerTimeout = window.setTimeout(() => announceCustomer(true), 1800);
     }
 
     startButton.addEventListener("click", startGame);
     serveButton.addEventListener("click", serveOrder);
+    igniteButton.addEventListener("click", igniteStove);
+    plateButton.addEventListener("click", plateOrder);
     for (const button of ingredientButtons) {
       button.addEventListener("click", () => chooseIngredient(button.dataset.ingredient));
     }
+    spoonButton.addEventListener("click", () => useTool("stir"));
+    spatulaButton.addEventListener("click", () => useTool("flip"));
+    fanButton.addEventListener("click", () => useTool("fan"));
   </script>
 </body>
 </html>

@@ -10,16 +10,22 @@ O site `MandyGames` reune jogos curtos e quizzes em portugues. As paginas atuais
 | --- | --- |
 | `index.html` | Pagina inicial escura do MandyGames, com catalogo interativo e disco voador decorativo; tambem contem o jogo da memoria com 10 pares de imagens de animais. |
 | `quiz.html` | Quiz escuro sobre o Sistema Solar, com selecao de tema e 8 perguntas por tema. |
-| `cozinha.html` | Jogo rapido de cozinha com gatos fotografados, comandas de estrogonofe, feijoada e churrasco e ingredientes selecionados por botoes. |
+| `cozinha3d.html` | Primeira versao 3D do Miau Chef, com chef controlavel, cozinha exploravel, teclado e controles de toque. |
+| `cozinha.html` | Jogo rapido de cozinha com ilustracoes locais dos gatos em uniformes de chef, comandas de estrogonofe, feijoada e churrasco e ingredientes selecionados por botoes. |
+| `cozinha3d.js` | Cena Three.js, movimento, interacoes, comandas, temporizadores e pontuacao do prototipo 3D. |
 | `site.css` | Cores, tipografia, navegacao, catalogo e componentes visuais compartilhados. |
 | `assets/universo-nasa.jpg` | Imagem local da Nebulosa de Orion usada no fundo do quiz e na capa do catalogo de planetas. |
 | `assets/catalogo-animais.svg` | Ilustracao do gato escondido usada na capa do jogo da memoria no catalogo. |
-| `assets/cozinha/` | Fotografias locais dos tres gatos cozinheiros usadas no jogo Miau Chef (Unsplash). |
+| `assets/cozinha/gato-chef-luna.svg` | Ilustracao original da gata Luna com uniforme de chef usada no Miau Chef. |
+| `assets/cozinha/gato-chef-bento.svg` | Ilustracao original do gato Bento com uniforme de chef usada no Miau Chef. |
+| `assets/cozinha/gato-chef-tita.svg` | Ilustracao original da gata Tita com uniforme de chef usada no Miau Chef. |
 | `Animais/` | Imagens locais usadas pelas cartas do jogo da memoria. |
 | `README.md` | Indice dos jogos e desta documentacao. |
 | `AGENTS.md` | Instrucoes para agentes que trabalham no repositorio. |
 
 Nao ha estrutura de framework ou etapa de build: as paginas contem seu proprio HTML, CSS e JavaScript, e compartilham os estilos comuns por `site.css`.
+
+O prototipo 3D carrega Three.js 0.160.0 pelo CDN cdnjs, sem etapa de build; e necessaria conexao com a internet para abrir `cozinha3d.html`.
 
 ## Como o quiz funciona
 
@@ -39,7 +45,13 @@ Em `index.html`, a pagina inicial apresenta as experiencias disponiveis. A opcao
 
 ## Como o Miau Chef funciona
 
-Em `cozinha.html`, o turno dura 60 segundos. A cada comanda, o jogador seleciona tres ingredientes na ordem mostrada e serve o prato. Ingredientes incorretos descontam dois segundos e encerram o combo; a fila embaralhada garante que estrogonofe, feijoada e churrasco aparecam em cada grupo de tres pedidos. Os retratos locais dos gatos foram obtidos do Unsplash.
+Em `cozinha.html`, os tres cozinheiros sao ilustracoes SVG originais criadas para o jogo, com pelagens e uniformes distintos. O turno dura cinco minutos e o cronometro da comanda reinicia a cada novo prato. A rapidez e os erros de preparo determinam a avaliacao em estrelas dada pelo cliente e os pontos acumulados; ao fim do turno, o placar mostra os pontos e a media de estrelas. Cada receita tem ingredientes e acoes de preparo proprios: estrogonofe e feijoada vao para a panela no fogao, enquanto o churrasco e preparado na churrasqueira com brasa, grelha, abanador e pegador. A feijoada leva feijao, carnes, bacon e coentro; depois de cozinhar, e montada no prato e finalizada com laranja, que nao entra na panela. Todos os pratos precisam ser montados antes da entrega.
+
+Ingredientes e utensilios fora de ordem descontam dois segundos e zeram o combo. A cada pedido, o cliente comenta enquanto espera e reage quando recebe a comida. As chamas, o vapor, os ingredientes, os movimentos da panela e a virada das carnes sao animados em CSS; a interface respeita a preferencia por movimento reduzido. A fila embaralhada garante que estrogonofe, feijoada e churrasco aparecam em cada grupo de tres pedidos.
+
+## Como o Miau Chef 3D funciona
+
+`cozinha3d.html` e `cozinha3d.js` formam um prototipo inicial em Three.js. O jogador controla um gatinho cozinheiro com WASD/setas ou controles direcionais de toque sobre a cena em telas pequenas; tocar em uma seta move um passo e segurar continua o movimento. A tecla E ou o botao de interacao funciona perto das estacoes. Para concluir um pedido, recolhe os ingredientes na bancada, cozinha no fogao ou na churrasqueira, monta o prato, finaliza a feijoada com laranja e entrega no balcao. O turno dura cinco minutos, cada comanda tem seu proprio cronometro e os clientes avaliam rapidez e erros com estrelas e pontos. A cena e composta por primitivas 3D e os controles respeitam movimento reduzido; este prototipo precisa de acesso ao CDN Three.js.
 
 ## Organizar novos jogos e quizzes
 
@@ -51,4 +63,4 @@ Em `cozinha.html`, o turno dura 60 segundos. A cada comanda, o jogador seleciona
 
 ## Verificacao manual
 
-Abra `index.html`, `quiz.html` e `cozinha.html` no navegador. Confirme que a pagina inicial permite escolher cada experiencia, teste os fluxos completos, o uso por teclado, a leitura em uma tela estreita e o carregamento das imagens. No Miau Chef, confira o cronometro, as tres receitas, o preparo correto, o erro de ingrediente, a entrega e o reinicio do turno. Ao mudar perguntas, confirme que a resposta indicada e sua explicacao estao corretas.
+Abra `index.html`, `quiz.html`, `cozinha.html` e `cozinha3d.html`. Confirme que a pagina inicial permite escolher cada experiencia, teste os fluxos completos, o uso por teclado, a leitura em uma tela estreita e o carregamento das imagens. No Miau Chef classico, confira o turno de cinco minutos, o cronometro individual reiniciado a cada prato, as avaliacoes e os pontos por rapidez e erros, o resultado final, as tres receitas, panela e fogao para estrogonofe e feijoada, churrasqueira e grelha para o churrasco, montagem de todos os pratos, laranja adicionada somente ao prato da feijoada, reacoes dos clientes e reinicio do turno; confirme tambem a apresentacao com movimento reduzido. No Miau Chef 3D, confirme o carregamento da cena, o movimento com teclado e controles de toque, as interacoes nas quatro estacoes, a finalizacao da feijoada com laranja e o cronometro de cinco minutos. Ao mudar perguntas, confirme que a resposta indicada e sua explicacao estao corretas.
