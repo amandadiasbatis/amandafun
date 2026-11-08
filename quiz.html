@@ -3,21 +3,22 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f8f7f4">
-  <title>Quiz dos planetas | quizzmandy</title>
+  <meta name="theme-color" content="#070b17">
+  <title>Quiz dos planetas | MandyGames</title>
+  <link rel="stylesheet" href="site.css">
   <style>
     :root {
-      color-scheme: light;
-      --ink: #292641;
-      --muted: #77758a;
-      --purple: #6557d9;
-      --lavender: #f1efff;
-      --yellow: #f3c354;
-      --green: #278765;
-      --red: #d95261;
-      --line: #eae8f0;
-      --paper: #fff;
-      --bg: #f8f7f4;
+      color-scheme: dark;
+      --ink: #f1f3ff;
+      --muted: #b0b7d0;
+      --purple: #b6a8ff;
+      --lavender: #252943;
+      --yellow: #f4cf79;
+      --green: #80ddb5;
+      --red: #ff9aa7;
+      --line: rgb(192 201 239 / 18%);
+      --paper: rgb(12 17 34 / 91%);
+      --bg: #070b17;
     }
 
     * { box-sizing: border-box; }
@@ -30,7 +31,7 @@
     .shell::after { right: -120px; bottom: 40px; }
     .topbar { position: relative; z-index: 1; display: flex; min-height: 76px; align-items: center; justify-content: space-between; gap: 16px; border-bottom: 1px solid var(--line); }
     .brand { display: inline-flex; align-items: center; gap: 9px; color: var(--ink); font-size: 21px; font-weight: 800; text-decoration: none; }
-    .brand-mark { display: grid; width: 34px; aspect-ratio: 1; place-items: center; border-radius: 11px; background: var(--purple); color: #fff; font-size: 20px; }
+    .brand-mark { display: grid; width: 42px; aspect-ratio: 1; place-items: center; border: 1px solid rgb(190 223 255 / 80%); border-radius: 50% 50% 42% 42%; background: linear-gradient(180deg, #d9fbff 0 22%, #6f9bc4 24% 42%, #5b52a7 46% 78%, #aaf2ff 80%); box-shadow: 0 0 18px rgb(136 213 255 / 44%); color: #080b17; font-size: 12px; letter-spacing: -.06em; }
     .brand-dot { color: var(--purple); }
     .game-links { display: flex; align-items: center; gap: 8px; }
     .game-links a { border-radius: 8px; padding: 9px 11px; color: var(--muted); font-size: 12px; font-weight: 700; text-decoration: none; }
@@ -130,7 +131,7 @@
       .shell { padding: 0 20px; }
       .topbar { min-height: 66px; }
       .brand { font-size: 17px; }
-      .brand-mark { width: 30px; border-radius: 9px; }
+      .brand-mark { width: 36px; }
       .game-links { gap: 2px; }
       .game-links a { padding: 8px 7px; font-size: 10px; }
       .page-content { padding: 32px 0 38px; }
@@ -161,26 +162,58 @@
       .features { gap: 10px; }
     }
 
+    body.quiz-page { background-color: var(--bg); background-image: linear-gradient(120deg, rgb(5 8 19 / 86%), rgb(5 9 23 / 76%) 52%, rgb(5 8 19 / 87%)), url("assets/universo-nasa.jpg"); background-position: center; background-size: cover; background-attachment: fixed; }
+    .quiz-page .shell::before, .quiz-page .shell::after { border-color: rgb(182 168 255 / 10%); }
+    .quiz-page .feature-icon.gold { background: #3a3020; color: var(--yellow); }
+    .quiz-page .feature small, .quiz-page .category-copy small, .quiz-page .card-footnote, .quiz-page .footer-hint, .quiz-page .footer { color: #b0b7d0; }
+    .quiz-page .start-card, .quiz-page .game-card, .quiz-page .result-card { border-color: var(--line); background: var(--paper); box-shadow: 0 15px 48px rgb(0 0 0 / 28%); backdrop-filter: blur(8px); }
+    .quiz-page .category-option { border-color: rgb(192 201 239 / 16%); background: rgb(20 27 49 / 88%); }
+    .quiz-page .category-option:hover, .quiz-page .answer-option:not(:disabled):hover { border-color: #9285f4; background: #1b2340; }
+    .quiz-page .category-option.selected { border-color: #9285f4; background: #242344; }
+    .quiz-page .category-number, .quiz-page .category-arrow, .quiz-page .progress-total { color: #9da6c2; }
+    .quiz-page .game-category { border-color: var(--line); background: rgb(12 17 34 / 88%); color: #d0d5e8; }
+    .quiz-page .score-pill, .quiz-page .result-icon { background: #3a3020; color: var(--yellow); }
+    .quiz-page .progress-track { background: #282d45; }
+    .quiz-page .progress-track span { background: linear-gradient(90deg, #8e83f0, #57c7d8); }
+    .quiz-page .answer-option { border-color: rgb(192 201 239 / 17%); background: rgb(20 27 49 / 88%); }
+    .quiz-page .answer-letter { background: #2a3048; color: #d0d5e8; }
+    .quiz-page .answer-option.correct { border-color: #50bd91; background: #15362f; color: #b5f1d5; }
+    .quiz-page .answer-option.correct .answer-letter { background: #245844; color: #d0ffe5; }
+    .quiz-page .answer-option.wrong { border-color: #e87887; background: #3d202d; color: #ffd2d8; }
+    .quiz-page .answer-option.wrong .answer-letter { background: #63303e; color: #ffe3e6; }
+    .quiz-page .feedback-good { background: #18392f; color: #91e5be; }
+    .quiz-page .feedback-try { background: #3b3020; color: var(--yellow); }
+    .quiz-page .game-footer { border-color: var(--line); }
+    .quiz-page .score-summary { border-color: var(--line); background: rgb(19 24 44 / 86%); }
+    .quiz-page .score-big span, .quiz-page .score-percent small { color: #aab2cb; }
+    .quiz-page .secondary-button { color: #b0b7d0; }
+    .quiz-page .footer { gap: 12px; }
+
+    @media (max-width: 680px) {
+      body.quiz-page { background-attachment: scroll; }
+      .quiz-page .footer { flex-wrap: wrap; padding: 12px 0; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
     }
   </style>
-  <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body class="quiz-page">
   <main class="shell">
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="quizzmandy, início"><span class="brand-mark" aria-hidden="true">?</span><span>quizzmandy<span class="brand-dot">.</span></span></a>
+      <a class="brand" href="index.html" aria-label="MandyGames, início"><span class="brand-mark" aria-hidden="true">MG</span><span>MandyGames<span class="brand-dot">.</span></span></a>
       <nav class="game-links" aria-label="Jogos">
         <a href="index.html">Início</a>
         <a href="index.html#animais">Animais</a>
         <a href="quiz.html" aria-current="page">Planetas</a>
+        <a href="cozinha.html">Miau Chef</a>
       </nav>
     </header>
 
     <div class="page-content" id="app" aria-live="polite"></div>
 
-    <footer class="footer"><span>feito para mentes curiosas ✦</span><span>quizzmandy. &copy; 2026</span></footer>
+    <footer class="footer"><span>feito para mentes curiosas ✦</span><span>Nebulosa de Órion: NASA/JPL-Caltech/STScI</span><span>MandyGames. &copy; 2026</span></footer>
   </main>
 
   <script>

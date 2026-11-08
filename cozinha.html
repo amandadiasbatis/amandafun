@@ -1,0 +1,424 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#fff6e8">
+  <title>Miau Chef | MandyGames</title>
+  <link rel="stylesheet" href="site.css">
+  <style>
+    :root {
+      color-scheme: light;
+      --ink: #3c2a20;
+      --muted: #826d5e;
+      --leaf: #bd5535;
+      --leaf-dark: #963e28;
+      --lime: #f5d875;
+      --coral: #c9573c;
+      --paper: #fffdf8;
+      --line: #eadcc9;
+      --shadow: 0 18px 44px rgb(87 54 28 / 10%);
+      --lavender: #fbead7;
+      --bg: #fff6e8;
+    }
+
+    * { box-sizing: border-box; }
+    body {
+      min-width: 320px;
+      min-height: 100vh;
+      margin: 0;
+      background-color: var(--bg);
+      background-image: radial-gradient(rgb(166 107 56 / 10%) .8px, transparent .8px), radial-gradient(ellipse at 86% 13%, rgb(249 210 135 / 25%), transparent 32%);
+      background-size: 24px 24px, auto;
+      color: var(--ink);
+      font-family: "Trebuchet MS", "Segoe UI", sans-serif;
+    }
+
+    button, a { font: inherit; }
+    button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline-offset: 3px; }
+    .kitchen-shell { width: min(100% - 36px, 1060px); margin: 0 auto; }
+    .topbar { gap: 14px; }
+    .brand-dot { color: var(--leaf); }
+    .page-content { padding: clamp(26px, 5vw, 52px) 0 36px; }
+    .intro { display: grid; align-items: center; grid-template-columns: minmax(0, 1fr) auto; gap: 20px; margin-bottom: 25px; }
+    .eyebrow { margin: 0 0 10px; color: var(--leaf); font-size: 10px; font-weight: 900; letter-spacing: .16em; }
+    h1 { max-width: 640px; margin: 0; font-family: Georgia, "Times New Roman", serif; font-size: clamp(37px, 6vw, 58px); line-height: 1.04; }
+    .intro-copy > p:last-child { max-width: 560px; margin: 12px 0 0; color: var(--muted); font-size: 14px; line-height: 1.65; }
+    .chef-portraits { display: flex; align-items: center; padding: 5px 8px; }
+    .chef-avatar { position: relative; width: clamp(68px, 9vw, 92px); aspect-ratio: 1; margin-left: -13px; overflow: hidden; border: 4px solid var(--bg); border-radius: 50%; background: #e8c99e; box-shadow: 0 4px 14px rgb(76 48 24 / 16%); }
+    .chef-avatar:first-child { margin-left: 0; }
+    .chef-avatar img { width: 100%; height: 100%; object-fit: cover; }
+    .chef-avatar::after { position: absolute; top: -1px; right: 7px; width: 22px; height: 12px; border: 2px solid #fff; border-radius: 55% 55% 35% 35%; background: #fff; box-shadow: 0 4px 0 -2px #fff; content: ""; }
+
+    .game-panel { overflow: hidden; border: 1px solid var(--line); border-radius: 18px; background: rgb(255 253 248 / 94%); box-shadow: var(--shadow); }
+    .scorebar { display: flex; align-items: center; justify-content: space-between; gap: 12px; border-bottom: 1px solid var(--line); background: #fffaf1; padding: 14px 18px; }
+    .score-group { display: flex; flex-wrap: wrap; gap: 9px; }
+    .score-chip { min-width: 104px; border: 1px solid var(--line); border-radius: 10px; background: #fffdf9; padding: 8px 11px; }
+    .score-chip span { display: block; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .1em; text-transform: uppercase; }
+    .score-chip strong { display: block; margin-top: 2px; font-family: Georgia, "Times New Roman", serif; font-size: 20px; font-variant-numeric: tabular-nums; }
+    .score-chip--time strong { color: var(--leaf); }
+    .start-button, .serve-button { display: inline-flex; min-height: 44px; align-items: center; justify-content: center; gap: 8px; border: 0; border-radius: 10px; background: var(--leaf); padding: 0 16px; color: #fff; font-size: 12px; font-weight: 900; cursor: pointer; transition: background 160ms ease, transform 160ms ease; }
+    .start-button:hover, .serve-button:hover:not(:disabled) { transform: translateY(-1px); background: var(--leaf-dark); }
+    .start-button:focus-visible, .serve-button:focus-visible, .ingredient:focus-visible { outline-color: #e9a23b; }
+    .kitchen-board { display: grid; grid-template-columns: minmax(210px, .86fr) minmax(230px, .9fr) minmax(300px, 1.24fr); gap: 14px; padding: 16px; }
+    .station { min-width: 0; border: 1px solid var(--line); border-radius: 14px; background: #fff; padding: 15px; }
+    .station-heading { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 0 0 12px; color: var(--muted); font-size: 9px; font-weight: 900; letter-spacing: .13em; text-transform: uppercase; }
+    .order-ticket { position: relative; min-height: 236px; overflow: hidden; border: 1px dashed #d9b993; border-radius: 12px; background: linear-gradient(145deg, #fff8e9, #fffdf8); padding: 16px; }
+    .ticket-stamp { display: inline-flex; align-items: center; gap: 5px; border-radius: 99px; background: #f7e2c6; padding: 5px 8px; color: #77512f; font-size: 9px; font-weight: 900; }
+    .dish-title { margin: 13px 0 5px; font-family: Georgia, "Times New Roman", serif; font-size: 22px; line-height: 1.15; }
+    .dish-note { min-height: 32px; margin: 0; color: var(--muted); font-size: 11px; line-height: 1.45; }
+    .recipe-steps { display: grid; gap: 6px; margin: 14px 0 0; padding: 0; list-style: none; }
+    .recipe-step { display: flex; align-items: center; gap: 8px; color: #9c8b7b; font-size: 10px; }
+    .step-check { display: grid; width: 19px; height: 19px; flex: 0 0 auto; place-items: center; border: 1px solid #e6d9c8; border-radius: 50%; background: #fff; color: transparent; font-size: 11px; font-weight: 900; }
+    .recipe-step.is-done { color: #4e8156; font-weight: 800; }
+    .recipe-step.is-done .step-check { border-color: #76ad7b; background: #e6f4df; color: #397542; }
+    .ticket-footer { margin-top: 12px; border-top: 1px dashed #dbc8af; padding-top: 9px; color: #89745e; font-size: 9px; font-weight: 700; }
+
+    .chef-stage { display: grid; min-height: 236px; place-items: center; align-content: center; overflow: hidden; border: 1px solid #ead8b8; border-radius: 12px; background: radial-gradient(ellipse at 50% 77%, #f5d9a8 0 37%, transparent 38%), linear-gradient(180deg, #fff3d8, #fffaf0); padding: 12px; }
+    .speech { position: relative; max-width: 100%; min-height: 39px; margin: 0 0 9px; border: 1px solid #f0dfc8; border-radius: 12px; background: #fff; padding: 9px 11px; color: #66503e; font-size: 10px; font-weight: 700; line-height: 1.35; text-align: center; }
+    .speech::after { position: absolute; bottom: -6px; left: calc(50% - 5px); width: 10px; height: 10px; transform: rotate(45deg); border-right: 1px solid #f0dfc8; border-bottom: 1px solid #f0dfc8; background: #fff; content: ""; }
+    .chef-portrait { position: relative; width: min(100%, 148px); aspect-ratio: 1; overflow: hidden; border: 5px solid #fff; border-radius: 50%; background: #e9c99e; box-shadow: 0 7px 22px rgb(99 65 34 / 15%); }
+    .chef-portrait::after { position: absolute; top: 0; left: calc(50% - 17px); width: 34px; height: 21px; border: 2px solid #fff; border-radius: 50% 50% 20% 20%; background: #fff; box-shadow: 0 5px 0 -2px #fff, 0 6px 0 -3px #d4b68f; content: ""; }
+    .chef-portrait img { display: block; width: 100%; height: 100%; object-fit: cover; }
+    .chef-name { margin: 8px 0 0; color: #79513a; font-size: 10px; font-weight: 900; }
+    .ingredient-station { display: flex; flex-direction: column; }
+    .ingredient-list { display: grid; flex: 1; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 8px; }
+    .ingredient { display: flex; min-width: 0; min-height: 57px; align-items: center; gap: 8px; border: 1px solid #eadfce; border-radius: 10px; background: #fffdfa; padding: 8px; color: var(--ink); text-align: left; cursor: pointer; transition: transform 140ms ease, border-color 140ms ease, background 140ms ease; }
+    .ingredient:hover:not(:disabled) { transform: translateY(-2px); border-color: #d3a66d; background: #fff8e9; }
+    .ingredient:disabled { cursor: default; opacity: .56; }
+    .ingredient-icon { display: grid; width: 30px; height: 30px; flex: 0 0 auto; place-items: center; border-radius: 9px; background: #fff0d6; font-size: 18px; }
+    .ingredient-label { overflow: hidden; font-size: 10px; font-weight: 800; text-overflow: ellipsis; }
+    .serve-button { width: 100%; margin-top: 10px; }
+    .serve-button:disabled { background: #d9d0c4; color: #fff; cursor: not-allowed; }
+    .game-status { min-height: 26px; margin: 0; border-top: 1px solid var(--line); background: #fffaf1; padding: 10px 16px 12px; color: #745a44; font-size: 11px; font-weight: 700; text-align: center; }
+    .game-status.is-success { color: #3a7d50; }
+    .game-status.is-error { color: #b94d3b; }
+    .instructions { margin: 12px 2px 0; color: var(--muted); font-size: 10px; line-height: 1.55; }
+    .instructions strong { color: var(--ink); }
+    .credit { margin: 22px 0 0; color: var(--muted); font-size: 9px; text-align: center; }
+    .credit a { color: var(--leaf-dark); font-weight: 800; }
+    .is-playing .chef-portrait { animation: chef-bob 1.6s ease-in-out infinite; }
+    .chef-stage.is-celebrating .chef-portrait { animation: chef-pop 450ms ease; }
+    @keyframes chef-bob { 50% { transform: translateY(-4px) rotate(1deg); } }
+    @keyframes chef-pop { 45% { transform: scale(1.09) rotate(-5deg); } }
+
+    @media (max-width: 780px) {
+      .kitchen-board { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+      .ingredient-station { grid-column: 1 / -1; }
+      .ingredient-list { grid-template-columns: repeat(4, minmax(0, 1fr)); }
+      .ingredient { flex-direction: column; justify-content: center; gap: 3px; text-align: center; }
+      .ingredient-label { width: 100%; }
+    }
+    @media (max-width: 560px) {
+      .kitchen-shell { width: min(100% - 28px, 440px); }
+      .topbar { align-items: flex-start; flex-direction: column; gap: 7px; padding: 11px 0; }
+      .game-links { flex-wrap: wrap; }
+      .game-links a { padding: 7px 8px; font-size: 10px; }
+      .intro { grid-template-columns: 1fr; gap: 14px; }
+      .intro-copy > p:last-child { font-size: 12px; }
+      .chef-portraits { padding-left: 4px; }
+      .chef-avatar { width: 58px; }
+      .page-content { padding-top: 27px; }
+      .scorebar { align-items: stretch; flex-direction: column; padding: 12px; }
+      .score-group { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 6px; }
+      .score-chip { min-width: 0; padding: 7px; }
+      .score-chip strong { font-size: 18px; }
+      .start-button { width: 100%; }
+      .kitchen-board { grid-template-columns: 1fr; gap: 10px; padding: 10px; }
+      .ingredient-station { grid-column: auto; }
+      .order-ticket { min-height: 0; }
+      .recipe-steps { grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 4px; }
+      .recipe-step { align-items: flex-start; font-size: 9px; }
+      .chef-stage { min-height: 190px; }
+      .chef-portrait { width: 122px; }
+      .ingredient-list { grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 6px; }
+      .ingredient { min-height: 64px; padding: 5px 3px; }
+      .ingredient-icon { width: 27px; height: 27px; font-size: 16px; }
+      .ingredient-label { font-size: 9px; }
+    }
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; animation-iteration-count: 1 !important; transition-duration: .01ms !important; }
+    }
+  </style>
+</head>
+<body>
+  <div class="kitchen-shell">
+    <header class="topbar">
+      <a class="brand" href="index.html" aria-label="MandyGames, início"><span class="brand-mark" aria-hidden="true">MG</span><span>MandyGames<span class="brand-dot">.</span></span></a>
+      <nav class="game-links" aria-label="Jogos">
+        <a href="index.html">Início</a>
+        <a href="quiz.html">Planetas</a>
+        <a href="cozinha.html" aria-current="page">Miau Chef</a>
+      </nav>
+    </header>
+
+    <main class="page-content">
+      <section class="intro" aria-labelledby="page-title">
+        <div class="intro-copy">
+          <p class="eyebrow">MIAU CHEF · CORRERIA NO FOGÃO</p>
+          <h1 id="page-title">Bigodes a postos. O pedido não espera!</h1>
+          <p>Monte pratos brasileiros com a equipe mais peluda do bairro. Acerte os ingredientes, sirva rapidinho e tente não deixar cair a farofa.</p>
+        </div>
+        <div class="chef-portraits" aria-label="Conheça os gatos cozinheiros">
+          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-luna.jpg" alt="Luna, gata ruiva cozinheira"></div>
+          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-bento.jpg" alt="Bento, gato de avental invisível"></div>
+          <div class="chef-avatar"><img src="assets/cozinha/gato-chef-tita.jpg" alt="Tita, gata de óculos escuros"></div>
+        </div>
+      </section>
+
+      <section class="game-panel" id="kitchen-game" aria-label="Jogo Miau Chef">
+        <div class="scorebar">
+          <div class="score-group" aria-label="Placar">
+            <div class="score-chip score-chip--time"><span>Tempo</span><strong id="timer">01:00</strong></div>
+            <div class="score-chip"><span>Pratos servidos</span><strong id="served">0</strong></div>
+            <div class="score-chip"><span>Combo de miau</span><strong id="combo">x0</strong></div>
+          </div>
+          <button class="start-button" id="start-button" type="button"><span aria-hidden="true">🍳</span> Abrir a cozinha</button>
+        </div>
+
+        <div class="kitchen-board">
+          <section class="station" aria-labelledby="order-heading">
+            <h2 class="station-heading" id="order-heading"><span>🎟️ Comanda</span><span id="order-number">--</span></h2>
+            <div class="order-ticket">
+              <span class="ticket-stamp">PEDIDO DA VEZ</span>
+              <h3 class="dish-title" id="dish-title">Aguardando o primeiro pedido</h3>
+              <p class="dish-note" id="dish-note">Abra a cozinha e descubra o que saiu do forno.</p>
+              <ol class="recipe-steps" id="recipe-steps" aria-label="Ingredientes do prato">
+                <li class="recipe-step"><span class="step-check" aria-hidden="true">✓</span><span>???</span></li>
+                <li class="recipe-step"><span class="step-check" aria-hidden="true">✓</span><span>???</span></li>
+                <li class="recipe-step"><span class="step-check" aria-hidden="true">✓</span><span>???</span></li>
+              </ol>
+              <div class="ticket-footer">Mesa 3 · cliente com fome e pressa</div>
+            </div>
+          </section>
+
+          <section class="station" aria-labelledby="chef-heading">
+            <h2 class="station-heading" id="chef-heading"><span>🐾 Chef de plantão</span><span>100% bigodes</span></h2>
+            <div class="chef-stage" id="chef-stage">
+              <p class="speech" id="speech" role="status" aria-live="polite">“Hoje eu só derrubei uma panela. Até agora.”</p>
+              <div class="chef-portrait"><img id="chef-image" src="assets/cozinha/gato-chef-luna.jpg" alt="Luna, gata cozinheira"></div>
+              <p class="chef-name" id="chef-name">Luna · chefe dos miados</p>
+            </div>
+          </section>
+
+          <section class="station ingredient-station" aria-labelledby="ingredient-heading">
+            <h2 class="station-heading" id="ingredient-heading"><span>🧺 Bancada de ingredientes</span><span>clique na ordem</span></h2>
+            <div class="ingredient-list" id="ingredient-list" aria-label="Escolha os ingredientes">
+              <button class="ingredient" type="button" data-ingredient="frango" disabled><span class="ingredient-icon" aria-hidden="true">🍗</span><span class="ingredient-label">Franguinho</span></button>
+              <button class="ingredient" type="button" data-ingredient="creme" disabled><span class="ingredient-icon" aria-hidden="true">🥛</span><span class="ingredient-label">Creme</span></button>
+              <button class="ingredient" type="button" data-ingredient="molho" disabled><span class="ingredient-icon" aria-hidden="true">🍅</span><span class="ingredient-label">Molho</span></button>
+              <button class="ingredient" type="button" data-ingredient="feijao" disabled><span class="ingredient-icon" aria-hidden="true">🫘</span><span class="ingredient-label">Feijão</span></button>
+              <button class="ingredient" type="button" data-ingredient="carnes" disabled><span class="ingredient-icon" aria-hidden="true">🥩</span><span class="ingredient-label">Carnes</span></button>
+              <button class="ingredient" type="button" data-ingredient="laranja" disabled><span class="ingredient-icon" aria-hidden="true">🍊</span><span class="ingredient-label">Laranja</span></button>
+              <button class="ingredient" type="button" data-ingredient="brasa" disabled><span class="ingredient-icon" aria-hidden="true">🔥</span><span class="ingredient-label">Brasa</span></button>
+              <button class="ingredient" type="button" data-ingredient="farofa" disabled><span class="ingredient-icon" aria-hidden="true">🥣</span><span class="ingredient-label">Farofa</span></button>
+            </div>
+            <button class="serve-button" id="serve-button" type="button" disabled><span aria-hidden="true">🍽️</span> Servir pedido</button>
+          </section>
+        </div>
+        <p class="game-status" id="game-status" role="status" aria-live="polite">Clique em “Abrir a cozinha” para começar o turno de 60 segundos.</p>
+      </section>
+
+      <p class="instructions"><strong>Como jogar:</strong> clique nos ingredientes da comanda na ordem indicada e sirva o prato. Ingrediente errado custa 2 segundos. Cada trio de comandas traz os três pratos do cardápio!</p>
+      <p class="credit">Fotografias dos gatinhos: <a href="https://unsplash.com/" target="_blank" rel="noopener noreferrer">Unsplash</a>.</p>
+    </main>
+  </div>
+
+  <script>
+    const recipes = [
+      {
+        id: "estrogonofe",
+        title: "Estrogonofe",
+        icon: "🍲",
+        note: "Cremoso, clássico e sem patinhas na panela.",
+        ingredients: ["frango", "creme", "molho"],
+        chef: { name: "Luna · chefe dos miados", image: "assets/cozinha/gato-chef-luna.jpg", alt: "Luna, gata ruiva cozinheira" }
+      },
+      {
+        id: "feijoada",
+        title: "Feijoada",
+        icon: "🫘",
+        note: "Capricha no feijão e não esquece a laranja!",
+        ingredients: ["feijao", "carnes", "laranja"],
+        chef: { name: "Bento · fiscal da soneca", image: "assets/cozinha/gato-chef-bento.jpg", alt: "Bento, gato preto e branco" }
+      },
+      {
+        id: "churrasco",
+        title: "Churrasco",
+        icon: "🥩",
+        note: "Acende a brasa. O gato já está de olho na picanha.",
+        ingredients: ["carnes", "brasa", "farofa"],
+        chef: { name: "Tita · mestre da grelha", image: "assets/cozinha/gato-chef-tita.jpg", alt: "Tita, gata cinza de óculos escuros" }
+      }
+    ];
+
+    const timerDisplay = document.querySelector("#timer");
+    const servedDisplay = document.querySelector("#served");
+    const comboDisplay = document.querySelector("#combo");
+    const startButton = document.querySelector("#start-button");
+    const serveButton = document.querySelector("#serve-button");
+    const ingredientButtons = Array.from(document.querySelectorAll(".ingredient"));
+    const dishTitle = document.querySelector("#dish-title");
+    const dishNote = document.querySelector("#dish-note");
+    const orderNumber = document.querySelector("#order-number");
+    const recipeSteps = document.querySelector("#recipe-steps");
+    const chefStage = document.querySelector("#chef-stage");
+    const chefImage = document.querySelector("#chef-image");
+    const chefName = document.querySelector("#chef-name");
+    const speech = document.querySelector("#speech");
+    const gameStatus = document.querySelector("#game-status");
+
+    let remainingSeconds = 60;
+    let served = 0;
+    let combo = 0;
+    let orderCount = 0;
+    let currentRecipe = null;
+    let nextIngredient = 0;
+    let recipeQueue = [];
+    let timerInterval = null;
+    let isPlaying = false;
+
+    function formatTime(seconds) {
+      const minutes = Math.floor(seconds / 60);
+      const remainder = seconds % 60;
+      return `${String(minutes).padStart(2, "0")}:${String(remainder).padStart(2, "0")}`;
+    }
+
+    function setStatus(message, tone = "") {
+      gameStatus.textContent = message;
+      gameStatus.classList.toggle("is-success", tone === "success");
+      gameStatus.classList.toggle("is-error", tone === "error");
+    }
+
+    function shuffle(items) {
+      const shuffled = [...items];
+      for (let index = shuffled.length - 1; index > 0; index -= 1) {
+        const swapIndex = Math.floor(Math.random() * (index + 1));
+        [shuffled[index], shuffled[swapIndex]] = [shuffled[swapIndex], shuffled[index]];
+      }
+      return shuffled;
+    }
+
+    function pickNextRecipe() {
+      if (recipeQueue.length === 0) recipeQueue = shuffle(recipes);
+      currentRecipe = recipeQueue.pop();
+      nextIngredient = 0;
+      renderRecipe();
+    }
+
+    function renderRecipe() {
+      dishTitle.textContent = `${currentRecipe.icon} ${currentRecipe.title}`;
+      dishNote.textContent = currentRecipe.note;
+      orderNumber.textContent = `#${String(orderCount + 1).padStart(2, "0")}`;
+      recipeSteps.replaceChildren(...currentRecipe.ingredients.map((ingredientId, index) => {
+        const button = ingredientButtons.find((item) => item.dataset.ingredient === ingredientId);
+        const step = document.createElement("li");
+        step.className = "recipe-step";
+        const check = document.createElement("span");
+        check.className = "step-check";
+        check.setAttribute("aria-hidden", "true");
+        check.textContent = "✓";
+        const label = document.createElement("span");
+        label.textContent = button.querySelector(".ingredient-label").textContent;
+        if (index < nextIngredient) step.classList.add("is-done");
+        step.append(check, label);
+        return step;
+      }));
+      chefImage.src = currentRecipe.chef.image;
+      chefImage.alt = currentRecipe.chef.alt;
+      chefName.textContent = currentRecipe.chef.name;
+      serveButton.disabled = true;
+    }
+
+    function setIngredientsEnabled(enabled) {
+      for (const button of ingredientButtons) button.disabled = !enabled;
+    }
+
+    function startGame() {
+      window.clearInterval(timerInterval);
+      remainingSeconds = 60;
+      served = 0;
+      combo = 0;
+      orderCount = 0;
+      recipeQueue = [];
+      isPlaying = true;
+      timerDisplay.textContent = formatTime(remainingSeconds);
+      servedDisplay.textContent = "0";
+      comboDisplay.textContent = "x0";
+      startButton.innerHTML = '<span aria-hidden="true">↻</span> Recomeçar';
+      setIngredientsEnabled(true);
+      pickNextRecipe();
+      setStatus("Começou! Monte a comanda antes que o chef faça uma soneca.", "success");
+      speech.textContent = "“Três pratos seguidos e eu ganho um sachê?”";
+      chefStage.classList.add("is-playing");
+      timerInterval = window.setInterval(() => {
+        remainingSeconds -= 1;
+        timerDisplay.textContent = formatTime(remainingSeconds);
+        if (remainingSeconds <= 0) finishGame();
+      }, 1000);
+    }
+
+    function finishGame() {
+      window.clearInterval(timerInterval);
+      isPlaying = false;
+      setIngredientsEnabled(false);
+      serveButton.disabled = true;
+      chefStage.classList.remove("is-playing");
+      startButton.innerHTML = '<span aria-hidden="true">🐾</span> Jogar outra vez';
+      const result = served === 0
+        ? "O turno acabou! A equipe felina pede revanche (e um lanchinho)."
+        : `Fim do turno! Você serviu ${served} ${served === 1 ? "prato" : "pratos"} e fez combo máximo de x${combo}.`;
+      setStatus(result, served ? "success" : "");
+      speech.textContent = served ? "“Miau! Serviço encerrado. Cadê meu pagamento em petiscos?”" : "“Eu pisquei e o turno acabou. De novo?”";
+    }
+
+    function chooseIngredient(ingredientId) {
+      if (!isPlaying || !currentRecipe) return;
+      if (ingredientId !== currentRecipe.ingredients[nextIngredient]) {
+        remainingSeconds = Math.max(0, remainingSeconds - 2);
+        timerDisplay.textContent = formatTime(remainingSeconds);
+        combo = 0;
+        comboDisplay.textContent = "x0";
+        setStatus("Ops, esse ingrediente não vai nessa receita! Você perdeu 2 segundos.", "error");
+        speech.textContent = "“Esse não era o combinado... agora a panela está confusa.”";
+        if (remainingSeconds === 0) finishGame();
+        return;
+      }
+
+      nextIngredient += 1;
+      renderRecipe();
+      if (nextIngredient === currentRecipe.ingredients.length) {
+        serveButton.disabled = false;
+        setStatus("Pratinho pronto! Clique em “Servir pedido” antes do próximo miado.", "success");
+        speech.textContent = "“Cheirinho bom! Pode mandar para a mesa!”";
+      } else {
+        const remaining = currentRecipe.ingredients.length - nextIngredient;
+        setStatus(`Boa! Faltam ${remaining} ${remaining === 1 ? "ingrediente" : "ingredientes"} para fechar o prato.`, "success");
+        speech.textContent = ["“Aí sim, chef! Próximo ingrediente!”", "“Perfeito. Minha patinha aprova!”"][nextIngredient % 2];
+      }
+    }
+
+    function serveOrder() {
+      if (!isPlaying || !currentRecipe || nextIngredient !== currentRecipe.ingredients.length) return;
+      served += 1;
+      combo += 1;
+      orderCount += 1;
+      servedDisplay.textContent = String(served);
+      comboDisplay.textContent = `x${combo}`;
+      chefStage.classList.remove("is-celebrating");
+      void chefStage.offsetWidth;
+      chefStage.classList.add("is-celebrating");
+      const cheers = ["Pedido entregue! Nem uma migalha no bigode.", "Mais um cliente feliz e um gato orgulhoso!", "Miau-perfeito! Próxima comanda chegando!"];
+      setStatus(cheers[(served - 1) % cheers.length], "success");
+      speech.textContent = combo >= 3 ? `“Combo x${combo}! Eu sou um gênio peludo!”` : "“Pedido entregue! Gorjeta em atum, por favor.”";
+      pickNextRecipe();
+    }
+
+    startButton.addEventListener("click", startGame);
+    serveButton.addEventListener("click", serveOrder);
+    for (const button of ingredientButtons) {
+      button.addEventListener("click", () => chooseIngredient(button.dataset.ingredient));
+    }
+  </script>
+</body>
+</html>

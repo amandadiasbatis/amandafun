@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 900 600" role="img" aria-labelledby="title description">
+  <title id="title">Gatinho tentando se esconder atrás de uma moita</title>
+  <desc id="description">Um gato laranja espreita por cima de uma moita; a cauda listrada e o traseiro continuam aparecendo do outro lado.</desc>
+  <defs>
+    <linearGradient id="sky" x2="0" y2="1">
+      <stop stop-color="#27305f"/>
+      <stop offset="1" stop-color="#83a6ac"/>
+    </linearGradient>
+    <linearGradient id="leaf" x2=".8" y2="1">
+      <stop stop-color="#8ce28e"/>
+      <stop offset="1" stop-color="#24845e"/>
+    </linearGradient>
+    <linearGradient id="leafLight" x2=".7" y2="1">
+      <stop stop-color="#b0ef9b"/>
+      <stop offset="1" stop-color="#58b86f"/>
+    </linearGradient>
+    <linearGradient id="fur" x2="0" y2="1">
+      <stop stop-color="#ffc46f"/>
+      <stop offset="1" stop-color="#e8793f"/>
+    </linearGradient>
+    <filter id="glow" x="-80%" y="-80%" width="260%" height="260%">
+      <feGaussianBlur stdDeviation="12"/>
+    </filter>
+  </defs>
+
+  <path fill="url(#sky)" d="M0 0h900v600H0z"/>
+  <circle cx="722" cy="111" r="52" fill="#ffe7a4" opacity=".18" filter="url(#glow)"/>
+  <circle cx="722" cy="111" r="27" fill="#fff0bc"/>
+  <g fill="#fff4c4">
+    <circle cx="106" cy="108" r="3"/><circle cx="210" cy="70" r="2"/>
+    <circle cx="374" cy="125" r="2.5"/><circle cx="544" cy="67" r="2"/>
+    <circle cx="829" cy="196" r="3"/><circle cx="120" cy="237" r="2"/>
+    <circle cx="630" cy="202" r="2"/>
+  </g>
+  <path fill="#405276" opacity=".65" d="M0 367q120-67 236 0t229-5q125-79 229 5t206-8v241H0z"/>
+  <path fill="#243b52" d="M0 438q151-74 291 0t299-8q159-76 310 9v161H0z"/>
+
+  <ellipse cx="227" cy="451" rx="96" ry="81" fill="url(#fur)"/>
+  <path fill="#d96839" d="M163 417q-43-42-68-15 17 42 61 47z"/>
+  <path fill="#ffd28a" d="M107 406q19 1 36 25-23-8-34-4z"/>
+  <path fill="none" stroke="#df783f" stroke-linecap="round" stroke-width="31" d="M167 433q-86 12-102-56t57-80"/>
+  <path fill="none" stroke="#ffca7b" stroke-linecap="round" stroke-width="11" d="M108 321q22-20 45-18M74 366q7 13 19 18"/>
+  <path fill="#cf6739" d="M176 499q-21 25-15 44 26 9 44-21l8-21z"/>
+  <path fill="#ffb765" d="M175 534q12 7 28-4l-3 15q-16 9-30 1z"/>
+
+  <path fill="#398859" d="M117 493q-27-67 26-101-17-71 53-95 22-79 96-53 49-67 112-27 69-49 112 18 76-16 92 66 64 28 30 88 43 39 5 92z"/>
+  <path fill="url(#leaf)" d="M91 477q-24-64 45-91-6-69 69-85 15-74 87-48 38-70 105-31 63-56 109 11 67-20 89 53 73 21 41 83 55 36 15 107z"/>
+  <path fill="url(#leafLight)" d="M139 426q-4-55 59-70-1-49 53-60 12-50 59-30 31-48 75-20 42-35 75 13 53-13 65 43 51 18 29 60 39 28 9 64H137z"/>
+  <g fill="#c6f39c" opacity=".9">
+    <ellipse cx="185" cy="394" rx="23" ry="8" transform="rotate(-32 185 394)"/>
+    <ellipse cx="270" cy="350" rx="25" ry="8" transform="rotate(22 270 350)"/>
+    <ellipse cx="365" cy="391" rx="26" ry="8" transform="rotate(-25 365 391)"/>
+    <ellipse cx="482" cy="354" rx="22" ry="8" transform="rotate(31 482 354)"/>
+    <ellipse cx="558" cy="405" rx="25" ry="8" transform="rotate(-18 558 405)"/>
+    <ellipse cx="645" cy="365" rx="24" ry="8" transform="rotate(22 645 365)"/>
+    <ellipse cx="727" cy="418" rx="26" ry="8" transform="rotate(-31 727 418)"/>
+  </g>
+  <g fill="#ffe895">
+    <circle cx="253" cy="422" r="7"/><circle cx="248" cy="416" r="4" fill="#fff7cf"/>
+    <circle cx="625" cy="439" r="7"/><circle cx="620" cy="433" r="4" fill="#fff7cf"/>
+    <circle cx="768" cy="389" r="6"/><circle cx="764" cy="384" r="3" fill="#fff7cf"/>
+  </g>
+
+  <path fill="#f3a14e" d="M585 251 598 173q4-18 20-5l48 43q21-8 43-3l47-49q15-13 20 7l17 91q30 29 19 78-14 66-106 68-96 2-127-49-25-42 6-103z"/>
+  <path fill="#ffcf83" d="m604 197 8-20 31 28q-22 1-39-8zm167-8 10-10 9 40q-12-17-19-30z"/>
+  <ellipse cx="669" cy="278" rx="14" ry="20" fill="#fff9dc"/>
+  <ellipse cx="745" cy="278" rx="14" ry="20" fill="#fff9dc"/>
+  <ellipse cx="674" cy="281" rx="6" ry="12" fill="#34445a"/>
+  <ellipse cx="740" cy="281" rx="6" ry="12" fill="#34445a"/>
+  <circle cx="676" cy="276" r="3" fill="#fff"/>
+  <circle cx="742" cy="276" r="3" fill="#fff"/>
+  <path fill="#ed7780" d="m696 312 11-8q5-4 10 0l11 8q-8 14-16 14-9 0-16-14z"/>
+  <path fill="none" stroke="#974a4b" stroke-linecap="round" stroke-width="4" d="M712 326q-8 12-17 3m17-3q9 12 18 3"/>
+  <g fill="#fff3d3" opacity=".9">
+    <circle cx="645" cy="310" r="4"/><circle cx="638" cy="316" r="3"/>
+    <circle cx="765" cy="311" r="4"/><circle cx="772" cy="317" r="3"/>
+  </g>
+  <path fill="none" stroke="#744b55" stroke-linecap="round" stroke-width="3" d="m654 320-39-2m42 10-36 8m130-16 39-2m-42 10 36 8"/>
+  <path fill="#f3a14e" d="M797 422q10-25 31-11 20 13 11 43l-9 23q-10 21-27 8-16-12-10-37z"/>
+  <path fill="#ffcf83" d="M802 462q17 13 35 0l-7 18q-16 12-30-2z"/>
+  <path fill="#f5a64f" d="M822 423q7-16 18-11 13 6 8 24l-8 24q-7 18-18 11-12-7-5-25z"/>
+  <path fill="#ffcf83" d="M824 462q12 9 25 0l-6 15q-11 8-22-2z"/>
+
+  <g fill="#c8fb9e" opacity=".9">
+    <circle cx="81" cy="285" r="5"/><circle cx="81" cy="285" r="16" opacity=".2"/>
+    <circle cx="841" cy="307" r="4"/><circle cx="841" cy="307" r="14" opacity=".2"/>
+  </g>
+</svg>

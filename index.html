@@ -3,20 +3,21 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#f3f6f0">
-  <title>quizzmandy | Jogos e quizzes</title>
+  <meta name="theme-color" content="#080b17">
+  <title>MandyGames | Jogos e quizzes</title>
+  <link rel="stylesheet" href="site.css">
   <style>
     :root {
-      color-scheme: light;
-      --ink: #193b32;
-      --muted: #587268;
-      --leaf: #28775c;
-      --leaf-dark: #1d5c46;
-      --lime: #d7ed71;
-      --coral: #ed7658;
-      --paper: #fffdf6;
-      --line: #d9e8dc;
-      --shadow: 0 18px 48px rgb(33 81 59 / 12%);
+      color-scheme: dark;
+      --ink: #f1f3ff;
+      --muted: #b2bad2;
+      --leaf: #a99bff;
+      --leaf-dark: #c8beff;
+      --lime: #b7adff;
+      --coral: #87e3f2;
+      --paper: #11172a;
+      --line: rgb(191 201 239 / 18%);
+      --shadow: 0 18px 48px rgb(0 0 0 / 28%);
     }
 
     * { box-sizing: border-box; }
@@ -26,9 +27,10 @@
       min-height: 100vh;
       margin: 0;
       color: var(--ink);
-      background-color: #e8f4e9;
-      background-image: radial-gradient(#bddcc6 1px, transparent 1px);
-      background-size: 22px 22px;
+      background-color: #080b17;
+      background-image: radial-gradient(rgb(192 204 255 / 27%) .8px, transparent .8px), radial-gradient(rgb(117 133 220 / 19%) 1px, transparent 1px), radial-gradient(ellipse at 18% 22%, rgb(91 55 145 / 24%), transparent 34%), radial-gradient(ellipse at 83% 72%, rgb(26 108 148 / 20%), transparent 38%);
+      background-position: 0 0, 13px 19px, center, center;
+      background-size: 47px 47px, 83px 83px, cover, cover;
       font-family: "Trebuchet MS", "Segoe UI", sans-serif;
     }
 
@@ -64,8 +66,13 @@
       aspect-ratio: 1;
       place-items: center;
       border-radius: 12px;
-      background: var(--lime);
-      font-size: 21px;
+      border: 1px solid rgb(190 223 255 / 80%);
+      border-radius: 50% 50% 42% 42%;
+      background: linear-gradient(180deg, #d9fbff 0 22%, #6f9bc4 24% 42%, #5b52a7 46% 78%, #aaf2ff 80%);
+      box-shadow: 0 0 18px rgb(136 213 255 / 44%);
+      color: #080b17;
+      font-size: 11px;
+      letter-spacing: -.06em;
     }
 
     .edition {
@@ -92,7 +99,7 @@
     }
 
     .game-nav a:hover, .game-nav a[aria-current="page"] {
-      background: #e2eee3;
+      background: #20233f;
       color: var(--leaf-dark);
     }
 
@@ -100,7 +107,7 @@
 
     .eyebrow {
       margin: 0 0 8px;
-      color: var(--leaf);
+      color: #c7baff;
       font-size: 12px;
       font-weight: 800;
       letter-spacing: 0.13em;
@@ -124,7 +131,7 @@
 
     .game-panel {
       padding: clamp(18px, 4vw, 32px);
-      border: 1px solid rgb(255 255 255 / 80%);
+      border: 1px solid var(--line);
       border-radius: 20px;
       background: var(--paper);
       box-shadow: var(--shadow);
@@ -149,7 +156,7 @@
       padding: 10px 14px;
       border: 1px solid var(--line);
       border-radius: 10px;
-      background: #f7fbf5;
+      background: #171d32;
     }
 
     .stat-label {
@@ -226,18 +233,18 @@
     }
 
     .card-back {
-      background-color: #dff0df;
-      background-image: radial-gradient(#b7d9be 1px, transparent 1px);
+      background-color: #242744;
+      background-image: radial-gradient(#7776b5 1px, transparent 1px);
       background-size: 12px 12px;
-      color: var(--leaf);
+      color: #d7d1ff;
       font-size: clamp(23px, 5vw, 34px);
       transition: background-color 180ms ease;
     }
 
-    .animal-card:hover:not(:disabled) .card-back { background-color: #d2eacd; }
+    .animal-card:hover:not(:disabled) .card-back { background-color: #303256; }
 
     .card-front {
-      background: #fff;
+      background: #171d32;
       transform: rotateY(180deg);
     }
 
@@ -249,8 +256,8 @@
     }
 
     .animal-card.is-matched .card-front {
-      border-color: #cf9bc4;
-      background: #ebcfea;
+      border-color: #d396eb;
+      background: #3b2948;
       animation: match-pop 360ms ease both;
     }
 
@@ -263,7 +270,7 @@
     }
 
     .status.is-success {
-      color: var(--leaf-dark);
+      color: #d4cbff;
       font-weight: 800;
     }
 
@@ -272,7 +279,7 @@
     }
 
     @media (max-width: 520px) {
-      .page { width: min(100% - 24px, 440px); padding-top: 18px; }
+      .page { width: min(100% - 36px, 440px); padding-top: 18px; }
       .topbar { margin-bottom: 26px; }
       .topbar { align-items: flex-start; flex-direction: column; gap: 10px; padding-bottom: 14px; }
       .game-nav a { padding: 7px 8px; font-size: 10px; }
@@ -289,15 +296,15 @@
       *, *::before, *::after { scroll-behavior: auto !important; animation-duration: 0.01ms !important; animation-iteration-count: 1 !important; transition-duration: 0.01ms !important; }
     }
   </style>
-  <link rel="stylesheet" href="site.css">
 </head>
-<body>
+<body class="home-page">
   <main class="page">
     <header class="topbar">
-      <a class="brand" href="index.html" aria-label="quizzmandy, início"><span class="brand-mark" aria-hidden="true">?</span><span>quizzmandy<span class="brand-dot">.</span></span></a>
+      <a class="brand" href="index.html" aria-label="MandyGames, início"><span class="brand-mark" aria-hidden="true">MG</span><span>MandyGames<span class="brand-dot">.</span></span></a>
       <nav class="game-nav" aria-label="Jogos">
         <a id="home-link" href="#jogos" aria-current="page">Início</a>
         <a href="quiz.html">Planetas</a>
+        <a href="cozinha.html">Miau Chef</a>
       </nav>
     </header>
 
@@ -305,41 +312,51 @@
       <div class="portal-intro">
         <p class="eyebrow">JOGOS E CURIOSIDADES</p>
         <h1 id="home-title" tabindex="-1">Escolha seu desafio.</h1>
-        <p>Encontre os pares de animais ou explore curiosidades sobre os planetas.</p>
+        <p>Encontre os pares, viaje pelo Sistema Solar ou encare uma correria deliciosa na cozinha.</p>
       </div>
 
-      <div class="experience-grid" id="jogos">
+      <div class="experience-grid" id="jogos" aria-label="Catálogo de jogos">
         <button class="experience-card" id="animais" type="button" data-action="start-memory">
-          <span class="experience-art experience-art--animals"><img src="Animais/animal1.jpeg" alt="" fetchpriority="high"></span>
+          <span class="experience-art experience-art--animals"><img src="assets/catalogo-animais.svg" alt="" fetchpriority="high"><span class="experience-art-label">O rabo entregou!</span></span>
           <span class="experience-copy">
-            <span class="experience-kicker">MEMÓRIA · ANIMAIS</span>
+            <span class="experience-kicker">DESAFIO DE OBSERVAÇÃO · 10 PARES</span>
             <span class="experience-title">Encontre os animais</span>
-            <span class="experience-description">Vire as cartas e combine os 10 pares escondidos.</span>
+            <span class="experience-description">Olhe com atenção: será que você lembra onde cada bichinho se esconde?</span>
             <span class="experience-cta">Jogar <span aria-hidden="true">→</span></span>
           </span>
         </button>
 
         <a class="experience-card" href="quiz.html">
-          <span class="experience-art experience-art--planets" aria-hidden="true"><span>🪐</span></span>
+          <span class="experience-art experience-art--planets" aria-hidden="true"><img src="assets/universo-nasa.jpg" alt=""><span class="experience-art-label">Até onde vai o seu universo?</span><span class="planet-orbit" aria-hidden="true">✦</span></span>
           <span class="experience-copy">
-            <span class="experience-kicker">QUIZ · SISTEMA SOLAR</span>
+            <span class="experience-kicker">MISSÃO CÓSMICA · 3 TEMAS</span>
             <span class="experience-title">Uma viagem pelos planetas</span>
-            <span class="experience-description">Escolha um tema, responda e descubra fatos do cosmos.</span>
+            <span class="experience-description">Explore o Sistema Solar e descubra se você conhece os segredos dos planetas.</span>
             <span class="experience-cta">Escolher tema <span aria-hidden="true">→</span></span>
           </span>
         </a>
+
+        <a class="experience-card" href="cozinha.html">
+          <span class="experience-art experience-art--kitchen" aria-hidden="true"><img src="assets/cozinha/gato-chef-luna.jpg" alt=""><span class="experience-art-label">Pedido maluco à vista!</span><span class="kitchen-orbit" aria-hidden="true">🍳</span></span>
+          <span class="experience-copy">
+            <span class="experience-kicker">CORRERIA NA COZINHA · 60 SEGUNDOS</span>
+            <span class="experience-title">Miau Chef: cozinha brasileira</span>
+            <span class="experience-description">Sirva estrogonofe, feijoada e churrasco antes que os clientes comecem a miar!</span>
+            <span class="experience-cta">Abrir a cozinha <span aria-hidden="true">→</span></span>
+          </span>
+        </a>
       </div>
-      <footer class="portal-footer">quizzmandy. <span>Aprender também pode ser divertido.</span></footer>
+      <footer class="portal-footer">MandyGames. <span>Curiosidade é o começo de toda aventura.</span></footer>
     </section>
 
     <section class="animal-view is-hidden" id="animal-game" aria-labelledby="page-title" aria-hidden="true">
       <section class="intro" aria-labelledby="page-title">
         <p class="eyebrow">OBSERVE · MEMORIZE · COMBINE</p>
-        <h1 id="page-title" tabindex="-1">Encontre os animais</h1>
+        <h1 id="page-title" tabindex="-1">Encontre os doguinhos</h1>
         <p class="subtitle">Vire as cartas e descubra o que está escondido.</p>
       </section>
 
-      <section class="game-panel" aria-label="Jogo da memória de animais">
+      <section class="game-panel" aria-label="Jogo da memória dos doguinhos">
       <div class="game-topline">
         <div class="stats" aria-label="Placar">
           <div class="stat">
@@ -360,6 +377,12 @@
     </section>
   </main>
 
+  <button class="saucer-flight" type="button" aria-label="Disco voador. Arraste para mover ou use as setas do teclado.">
+    <span class="saucer-dome" aria-hidden="true"></span>
+    <span class="saucer-disc" aria-hidden="true">MG</span>
+    <span class="saucer-lights" aria-hidden="true"></span>
+  </button>
+
   <script>
     const images = [
       "animal1.jpeg", "animal2.jpg", "animal3.jpg", "animal4.jpeg", "animal5.jpg",
@@ -376,6 +399,7 @@
     const animalStartButton = document.querySelector("#animais");
     const homeTitle = document.querySelector("#home-title");
     const animalTitle = document.querySelector("#page-title");
+    const saucer = document.querySelector(".saucer-flight");
 
     let firstCard = null;
     let secondCard = null;
@@ -383,6 +407,102 @@
     let attempts = 0;
     let matchedPairs = 0;
     let mismatchTimer = null;
+    let saucerPointer = null;
+    let saucerOffset = { x: 0, y: 0 };
+    const saucerMotionPreference = window.matchMedia("(prefers-reduced-motion: reduce)");
+    const saucerLapDuration = 36000;
+
+    function saucerBasePosition(timestamp) {
+      const padding = 16;
+      const maxLeft = Math.max(padding, document.documentElement.clientWidth - saucer.offsetWidth - padding);
+      const maxTop = Math.max(padding, document.documentElement.clientHeight - saucer.offsetHeight - padding);
+      const width = maxLeft - padding;
+      const height = maxTop - padding;
+      const perimeter = 2 * (width + height);
+      const distance = (timestamp % saucerLapDuration) / saucerLapDuration * perimeter;
+      const edges = [
+        { length: width, x: (progress) => padding + width * progress, y: () => padding },
+        { length: height, x: () => maxLeft, y: (progress) => padding + height * progress },
+        { length: width, x: (progress) => maxLeft - width * progress, y: () => maxTop },
+        { length: height, x: () => padding, y: (progress) => maxTop - height * progress }
+      ];
+      let remaining = distance;
+      for (const edge of edges) {
+        if (remaining <= edge.length) {
+          const progress = edge.length ? remaining / edge.length : 0;
+          return { x: edge.x(progress), y: edge.y(progress) };
+        }
+        remaining -= edge.length;
+      }
+      return { x: padding, y: padding };
+    }
+
+    function renderSaucer(timestamp) {
+      const padding = 16;
+      const maxLeft = Math.max(0, document.documentElement.clientWidth - saucer.offsetWidth);
+      const maxTop = Math.max(0, document.documentElement.clientHeight - saucer.offsetHeight);
+      const base = saucerMotionPreference.matches ? { x: padding, y: padding } : saucerBasePosition(timestamp);
+      const left = Math.min(maxLeft, Math.max(0, base.x + saucerOffset.x));
+      const top = Math.min(maxTop, Math.max(0, base.y + saucerOffset.y));
+      saucer.style.transform = `translate3d(${left}px, ${top}px, 0)`;
+    }
+
+    saucer.addEventListener("pointerdown", (event) => {
+      if (event.button !== 0) return;
+      const bounds = saucer.getBoundingClientRect();
+      saucerPointer = {
+        id: event.pointerId,
+        x: event.clientX,
+        y: event.clientY
+      };
+      saucer.classList.add("is-dragging");
+      saucer.setPointerCapture(event.pointerId);
+      event.preventDefault();
+    });
+
+    saucer.addEventListener("pointermove", (event) => {
+      if (!saucerPointer || event.pointerId !== saucerPointer.id) return;
+      saucerOffset.x += event.clientX - saucerPointer.x;
+      saucerOffset.y += event.clientY - saucerPointer.y;
+      saucerPointer.x = event.clientX;
+      saucerPointer.y = event.clientY;
+      renderSaucer(performance.now());
+    });
+
+    function stopSaucerDrag(event) {
+      if (!saucerPointer || event.pointerId !== saucerPointer.id) return;
+      saucerPointer = null;
+      saucer.classList.remove("is-dragging");
+    }
+
+    saucer.addEventListener("pointerup", stopSaucerDrag);
+    saucer.addEventListener("pointercancel", stopSaucerDrag);
+    saucer.addEventListener("keydown", (event) => {
+      const step = event.shiftKey ? 48 : 20;
+      const directions = {
+        ArrowUp: [0, -step],
+        ArrowDown: [0, step],
+        ArrowLeft: [-step, 0],
+        ArrowRight: [step, 0]
+      };
+      const direction = directions[event.key];
+      if (!direction) return;
+      event.preventDefault();
+      saucerOffset.x += direction[0];
+      saucerOffset.y += direction[1];
+      renderSaucer(performance.now());
+    });
+
+    function animateSaucer(timestamp) {
+      renderSaucer(timestamp);
+      if (!saucerMotionPreference.matches && animalView.classList.contains("is-hidden")) {
+        requestAnimationFrame(animateSaucer);
+      }
+    }
+
+    requestAnimationFrame(animateSaucer);
+    saucerMotionPreference.addEventListener("change", () => requestAnimationFrame(animateSaucer));
+    window.addEventListener("resize", () => renderSaucer(performance.now()));
 
     function shuffledCards() {
       const cards = [...images, ...images];
@@ -447,6 +567,7 @@
       homeView.classList.remove("is-hidden");
       animalView.classList.add("is-hidden");
       animalView.setAttribute("aria-hidden", "true");
+      requestAnimationFrame(animateSaucer);
       homeTitle.focus();
     }
 

@@ -1,9 +1,9 @@
-# amandafun
+# MandyGames
 
-Abra a página inicial para escolher uma experiência:
+Escolha um jogo na [página inicial](index.html):
 
-- [Escolher um jogo ou quiz](index.html)
 - [Quiz dos planetas](quiz.html)
+- [Miau Chef: cozinha brasileira](cozinha.html) — monte estrogonofe, feijoada e churrasco com os gatos cozinheiros.
 
 ## Conhecimento do projeto
 

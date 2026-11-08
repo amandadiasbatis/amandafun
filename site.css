@@ -124,6 +124,269 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
 .portal-footer { display: flex; justify-content: space-between; gap: 12px; margin-top: 27px; border-top: 1px solid var(--line); padding-top: 14px; color: var(--muted); font-size: 11px; font-weight: 700; }
 .portal-footer span { font-weight: 400; }
 
+.home-page .page { position: relative; z-index: 1; padding-top: 72px; }
+.home-page .brand { letter-spacing: .01em; text-transform: none; }
+.home-page .brand-mark {
+  position: relative;
+  z-index: 0;
+  overflow: visible;
+  border: 1px solid rgb(190 223 255 / 80%);
+  border-radius: 50% 50% 42% 42%;
+  background: linear-gradient(180deg, #d9fbff 0 22%, #6f9bc4 24% 42%, #5b52a7 46% 78%, #aaf2ff 80%);
+  box-shadow: 0 0 18px rgb(136 213 255 / 44%);
+  color: #080b17;
+  font-size: 11px;
+  letter-spacing: -.06em;
+}
+.home-page .game-nav a:hover, .home-page .game-nav a[aria-current="page"] { background: #20233f; }
+.home-page .experience-card {
+  position: relative;
+  border-color: rgb(191 201 239 / 18%);
+  background: rgb(17 23 42 / 92%);
+  box-shadow: 0 18px 48px rgb(0 0 0 / 28%);
+}
+.home-page .experience-card:hover, .home-page .experience-card:focus-visible {
+  border-color: #8d81e7;
+  box-shadow: 0 22px 54px rgb(0 0 0 / 42%), 0 0 24px rgb(118 104 223 / 18%);
+}
+.home-page .experience-grid { width: min(100%, 860px); margin: 0 auto; gap: 16px; }
+.home-page .experience-art { position: relative; display: block; height: 170px; background: #10172d; }
+.home-page .experience-art::after {
+  position: absolute;
+  z-index: 1;
+  inset: 30% 0 0;
+  background: linear-gradient(180deg, transparent, rgb(5 8 19 / 80%));
+  content: "";
+  pointer-events: none;
+}
+.home-page .experience-art--animals { background: #10172d; }
+.home-page .experience-art--kitchen { overflow: hidden; background: #3a281c; }
+.home-page .experience-art--animals img,
+.home-page .experience-art--planets img,
+.home-page .experience-art--kitchen img {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+  object-fit: cover;
+  transition: transform 650ms cubic-bezier(.2, .65, .25, 1), filter 300ms ease;
+}
+.home-page .experience-art--animals img { object-position: center 38%; }
+.home-page .experience-art--planets { overflow: hidden; background: #090d1c; }
+.home-page .experience-art--planets img { object-position: center 42%; }
+.home-page .experience-art--kitchen img { object-position: center 38%; }
+.home-page .experience-art-label {
+  position: absolute;
+  z-index: 2;
+  bottom: 12px;
+  left: 14px;
+  color: #fff;
+  font-size: 11px;
+  font-weight: 800;
+  letter-spacing: .04em;
+  text-shadow: 0 2px 12px rgb(0 0 0 / 70%);
+}
+.home-page .planet-orbit {
+  position: absolute;
+  z-index: 2;
+  top: 28px;
+  right: 34px;
+  display: grid;
+  width: 62px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgb(207 200 255 / 70%);
+  border-radius: 50%;
+  color: #fff2b3;
+  font-size: 19px;
+  box-shadow: 0 0 20px rgb(167 151 255 / 48%), inset 0 0 14px rgb(167 151 255 / 26%);
+  transition: transform 500ms ease;
+}
+.home-page .kitchen-orbit {
+  position: absolute;
+  z-index: 2;
+  top: 24px;
+  right: 28px;
+  display: grid;
+  width: 54px;
+  aspect-ratio: 1;
+  place-items: center;
+  border: 1px solid rgb(255 239 202 / 76%);
+  border-radius: 50%;
+  background: rgb(71 43 27 / 62%);
+  box-shadow: 0 0 20px rgb(252 196 110 / 38%);
+  font-size: 24px;
+  transition: transform 500ms ease;
+}
+.home-page .experience-art--planets .planet-orbit::after {
+  position: absolute;
+  top: -4px;
+  right: 7px;
+  width: 8px;
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: #f5dc8e;
+  box-shadow: 0 0 12px #f5dc8e;
+  content: "";
+}
+.home-page .experience-card:hover .experience-art img,
+.home-page .experience-card:focus-visible .experience-art img { transform: scale(1.09); filter: saturate(1.18); }
+.home-page .experience-card:hover .planet-orbit,
+.home-page .experience-card:focus-visible .planet-orbit,
+.home-page .experience-card:hover .kitchen-orbit,
+.home-page .experience-card:focus-visible .kitchen-orbit { transform: rotate(22deg) scale(1.08); }
+.home-page .experience-kicker { color: #c1b6ff; }
+.home-page .experience-copy { gap: 7px; padding: 14px 16px 15px; }
+.home-page .experience-kicker { font-size: 9px; }
+.home-page .experience-title { color: #f2f1ff; font-size: 21px; }
+.home-page .experience-description { color: #b2bad2; font-size: 12px; }
+.home-page .experience-cta { margin-top: 3px; color: #a9e8f4; font-size: 11px; }
+.home-page .portal-footer { border-color: rgb(191 201 239 / 18%); color: #c1b6ff; }
+.home-page .portal-footer span { color: #b2bad2; }
+.home-page .game-panel { border-color: rgb(191 201 239 / 18%); background: rgb(17 23 42 / 92%); }
+.home-page .stat { border-color: rgb(191 201 239 / 18%); background: #171d32; }
+.home-page .card-back { border-color: rgb(191 201 239 / 18%); background-color: #242744; background-image: radial-gradient(#7776b5 1px, transparent 1px); color: #d7d1ff; }
+.home-page .card-front { border-color: rgb(191 201 239 / 18%); background: #171d32; }
+.home-page .animal-card.is-matched .card-front { border-color: #d396eb; background: #3b2948; }
+.home-page .status.is-success { color: #aaf2ce; }
+
+body.home-page:has(#animal-game:not(.is-hidden)) {
+  --ink: #edf5e8;
+  --muted: #b7c8b1;
+  --leaf: #70bd78;
+  --leaf-dark: #4a9a60;
+  --coral: #b9efad;
+  --line: rgb(167 206 151 / 24%);
+  --paper: rgb(19 36 25 / 95%);
+  --shadow: 0 18px 42px rgb(3 12 6 / 34%);
+  color: var(--ink);
+  background-color: #101a13;
+  background-image:
+    radial-gradient(ellipse at 14% 25%, rgb(53 105 60 / 19%), transparent 34%),
+    radial-gradient(ellipse at 88% 73%, rgb(37 93 57 / 18%), transparent 36%),
+    radial-gradient(rgb(174 209 148 / 10%) .8px, transparent .8px);
+  background-size: auto, auto, 30px 30px;
+}
+body.home-page:has(#animal-game:not(.is-hidden))::before {
+  position: fixed;
+  z-index: 0;
+  inset: 0;
+  background-image:
+    radial-gradient(ellipse 75px 39px at 7% 89%, rgb(78 133 67 / 24%) 0 65%, transparent 68%),
+    radial-gradient(ellipse 62px 33px at 13% 91%, rgb(43 103 58 / 26%) 0 65%, transparent 68%),
+    radial-gradient(ellipse 80px 42px at 93% 13%, rgb(72 125 64 / 20%) 0 65%, transparent 68%),
+    radial-gradient(ellipse 58px 30px at 88% 15%, rgb(43 103 58 / 22%) 0 65%, transparent 68%),
+    radial-gradient(ellipse 68px 35px at 96% 87%, rgb(43 103 58 / 19%) 0 65%, transparent 68%);
+  content: "";
+  pointer-events: none;
+}
+body.home-page:has(#animal-game:not(.is-hidden))::after {
+  position: fixed;
+  z-index: 0;
+  width: 120px;
+  height: 50px;
+  right: 4vw;
+  bottom: 5vh;
+  background: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 50'%3E%3Cg fill='%23d3ebbd'%3E%3Cellipse cx='27' cy='35' rx='15' ry='9'/%3E%3Ccircle cx='42' cy='29' r='8'/%3E%3Cellipse cx='38' cy='15' rx='3' ry='11' transform='rotate(-12 38 15)'/%3E%3Cellipse cx='46' cy='15' rx='3' ry='11' transform='rotate(12 46 15)'/%3E%3Ccircle cx='16' cy='34' r='5'/%3E%3Cpath d='M18 42h7v5h-7zm18 0h7v5h-7z'/%3E%3Cpath d='M78 40q-10-11-2-24 9-14 20-6 10 8 3 19-4 5-10 3 6-7 0-10-5-3-7 3-2 7 4 15z'/%3E%3Ccircle cx='99' cy='27' r='7'/%3E%3Cpath d='m95 21 2-8 5 7zM99 46h7v3h-7z'/%3E%3C/g%3E%3C/svg%3E") center / contain no-repeat;
+  content: "";
+  opacity: .14;
+  pointer-events: none;
+}
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .intro .eyebrow { color: #9cdb91; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .subtitle { color: #c2d2bc; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .game-panel {
+  border-color: rgb(167 206 151 / 24%);
+  background: rgb(17 33 23 / 94%);
+  box-shadow: 0 18px 42px rgb(3 12 6 / 34%);
+}
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .stat {
+  border-color: rgb(167 206 151 / 22%);
+  background: #1b3021;
+}
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .new-game { background: #398553; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .new-game:hover { background: #2f7047; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .card-face { border-color: rgb(167 206 151 / 28%); }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .card-back {
+  background-color: #294b31;
+  background-image:
+    radial-gradient(ellipse at 30% 35%, rgb(151 199 116 / 54%) 0 8%, transparent 9%),
+    radial-gradient(ellipse at 67% 67%, rgb(114 174 99 / 48%) 0 10%, transparent 11%),
+    radial-gradient(rgb(202 226 153 / 27%) 1px, transparent 1px);
+  background-size: 30px 25px, 34px 29px, 15px 15px;
+  color: #d6efb6;
+}
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .animal-card:hover:not(:disabled) .card-back { background-color: #345b3c; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .card-front { background: #1b3021; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .animal-card.is-matched .card-front { border-color: #a5d69c; background: #294d32; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .animal-card:focus-visible { outline-color: #b9efad; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .status { color: #c2d2bc; }
+body.home-page:has(#animal-game:not(.is-hidden)) .animal-view .status.is-success { color: #aaf2ce; }
+body.home-page:has(#animal-game:not(.is-hidden)) .saucer-flight { display: none; }
+
+.home-page .saucer-flight {
+  --saucer-width: 88px;
+  --saucer-height: 48px;
+  position: fixed;
+  z-index: 2;
+  display: block;
+  top: 0;
+  left: 0;
+  width: var(--saucer-width);
+  height: var(--saucer-height);
+  padding: 0;
+  border: 0;
+  background: transparent;
+  opacity: .88;
+  cursor: grab;
+  touch-action: none;
+  will-change: transform;
+}
+.home-page .saucer-flight:focus-visible { outline: 3px solid #aaf2ff; outline-offset: 5px; }
+.home-page .saucer-flight.is-dragging { cursor: grabbing; }
+.home-page .saucer-disc {
+  position: absolute;
+  right: 0;
+  bottom: 5px;
+  left: 0;
+  display: grid;
+  height: 27px;
+  place-items: center;
+  clip-path: polygon(16% 0, 84% 0, 100% 56%, 74% 100%, 26% 100%, 0 56%);
+  border: 1px solid #d5faff;
+  border-radius: 50%;
+  background: linear-gradient(180deg, #b8e4fa, #7376c4 48%, #383d83);
+  box-shadow: 0 0 16px rgb(123 225 255 / 72%), 0 0 30px rgb(131 115 255 / 46%);
+  color: #10152b;
+  font-size: 12px;
+  font-weight: 900;
+  letter-spacing: -.05em;
+}
+.home-page .saucer-dome {
+  position: absolute;
+  z-index: 1;
+  top: 1px;
+  left: 27px;
+  width: 34px;
+  height: 20px;
+  border: 1px solid rgb(218 252 255 / 90%);
+  border-radius: 50% 50% 22% 22%;
+  background: linear-gradient(145deg, rgb(226 255 255 / 88%), rgb(112 160 219 / 55%) 62%, rgb(91 85 169 / 80%));
+  box-shadow: 0 0 12px rgb(143 229 255 / 65%);
+}
+.home-page .saucer-lights {
+  position: absolute;
+  z-index: 2;
+  right: 20px;
+  bottom: 8px;
+  left: 20px;
+  height: 4px;
+  border-radius: 50%;
+  background: repeating-linear-gradient(90deg, #fff5b0 0 4px, transparent 4px 13px);
+  filter: drop-shadow(0 0 5px #ffe58d);
+}
+
 .animal-view { padding: 30px 0 36px; }
 .animal-view .intro { margin-bottom: 22px; }
 .animal-view .eyebrow { color: var(--leaf); }
@@ -157,9 +420,12 @@ button:focus-visible, a:focus-visible { outline: 3px solid var(--coral); outline
   .portal-intro > p:last-child { font-size: 13px; }
   .experience-grid { grid-template-columns: 1fr; gap: 13px; }
   .experience-art { height: 180px; }
+  .home-page .experience-grid { gap: 12px; }
+  .home-page .experience-art { height: 150px; }
   .experience-copy { padding: 16px; }
   .experience-title { font-size: 22px; }
   .portal-footer { flex-direction: column; }
+  .home-page .portal-footer { gap: 7px; }
   .animal-view { padding-top: 24px; }
 }
 
